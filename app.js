@@ -1,7 +1,8 @@
 const express = require('express');
-const app = express();
-const router = require('./src/server');
+const router = require('./src/server/routes');
 const configureAppVariables = require('./src/config/appVariables');
+
+const app = express();
 
 configureAppVariables(app);
 
@@ -11,8 +12,6 @@ app.listen(app.get('PORT'), () => {
 
 app.use(router);
 
-app.get('/*', function (req, res) {
-  res.sendFile(app.get('indexHTML'));
-});
+app.get('/*', (req, res) => res.sendFile(app.get('indexHTML')));
 
-app.use(require('./src/server/utils/errorCatcher'));
+app.use(require('./src/server/routes/utils/errorCatcher'));
