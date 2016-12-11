@@ -2,6 +2,10 @@ const path = require('path');
 
 const rootPath = path.join(__dirname, '../');
 
+if (process.env.NODE_ENV === 'test') {
+  process.dbURL = 'postgres://localhost:5432/my-react-app-test';
+}
+
 module.exports = (app) => {
   app.set('rootPath', rootPath);
   app.set('indexHTML', `${rootPath}/client/index.html`);

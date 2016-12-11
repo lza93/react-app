@@ -10,6 +10,7 @@ module.exports = {
     "func-names": 0,
     "no-param-reassign": 0,
     "no-unused-vars": 1,
+    "no-useless-return": 0,
     "react/prefer-stateless-function": 1,
   },
 };

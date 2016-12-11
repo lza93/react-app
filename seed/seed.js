@@ -6,11 +6,17 @@ const runSeed = () => {
   db.authenticate()
     .then(() => db.sync({ force: true }))
     .then(() => User.create({
-      username: 'bob',
+      username: 'bb',
       email: 'bob@example.com',
       password: '123456',
     }))
-    .then(() => {
+    .then((user) => {
+      return user.update({username: 'bob'});
+    })
+    .then((user) => {
+      return user.checkPassword('12345s6');
+    })
+    .then((password) => {
       console.log('Successfully Seeded');
       process.exit(0);
     })

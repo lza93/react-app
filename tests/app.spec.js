@@ -1,4 +1,4 @@
-/* global describe it xit expect */
+/* global describe it xit */
 
 const { expect } = require('chai');
 

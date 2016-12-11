@@ -6,14 +6,16 @@
   "scripts": {
     "build": "webpack -p",
     "dev": "webpack -d --watch",
-    "seed": "node seed/seed.js",
-    "start": "nodemon app.js || webpack -d --watch",
-    "test": "mocha tests tests/client/helpers/globalTestVariables.js --recursive"
+    "seed-dev": "NODE_ENV=dev node seed/seed.js",
+    "seed-test": "NODE_ENV=test node seed/seed.js",
+    "start": "NODE_ENV=dev nodemon app.js || webpack -d --watch",
+    "test": "NODE_ENV=test mocha tests tests/client/helpers/globalTestVariables.js --recursive"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.1",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "pg": "^6.1.0",
