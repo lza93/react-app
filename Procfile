@@ -1,1 +1,1 @@
-web: node app.js
+web: node --hamony-async-await app.js
