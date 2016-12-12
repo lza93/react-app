@@ -35,9 +35,9 @@ const userConfig = {
     hashPassword() {
       return new Promise((resolve, reject) =>
         bcrypt.hash(this.password, 4, (err, hash) => {
-          if (err) { reject(err); }
+          if (err) { return reject(err); }
           this.password = hash;
-          resolve(true);
+          return resolve(hash);
         }));
     },
   },

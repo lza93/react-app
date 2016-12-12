@@ -8,8 +8,8 @@
     "dev": "webpack -d --watch",
     "seed-dev": "NODE_ENV=dev node seed/seed.js",
     "seed-test": "NODE_ENV=test node seed/seed.js",
-    "start": "NODE_ENV=dev nodemon app.js || webpack -d --watch",
-    "test": "NODE_ENV=test mocha tests tests/client/helpers/globalTestVariables.js --recursive"
+    "start": "NODE_ENV=dev nodemon --harmony-async-await app.js || webpack -d --watch",
+    "test": "NODE_ENV=test mocha tests tests/client/helpers/globalTestVariables.js --harmony-async-await --recursive"
   },
   "keywords": [],
   "author": "",
@@ -44,6 +44,7 @@
     "react-addons-test-utils": "^15.4.1",
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.6",
+    "sinon-as-promised": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3"
   }

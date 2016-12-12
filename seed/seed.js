@@ -32,8 +32,8 @@ process.stdout.write(`You are about to reseed your database
   this? Type 'SEED' and press enter to continue
   >>`);
 process.stdin.on('data', (data) => {
-  data = data.toString().trim();
-  if (data === 'SEED') {
+  const input = data.toString().trim();
+  if (input === 'SEED') {
     runSeed();
   } else {
     process.stdout.write('Exiting without seeding');

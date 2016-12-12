@@ -13,7 +13,7 @@ const logger = (query) => {
 };
 
 const db = new Sequelize(dbURL, {
-  logging: logger,
+  logging: process.env.NODE_ENV === 'test' ? false : logger,
 });
 
 module.exports = db;
