@@ -1,19 +1,4 @@
-body, div, nav {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-h1 {
-  color: red;
-}
-
-.clearfix {
-  &::after, &::before {
-    content: "";
-    display: block;
-    clear: both;
-  }
-}
+@import "normalize";
+@import "grid";
 
 @import "navbar"

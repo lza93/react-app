@@ -1,0 +1,58 @@
+// Layout grid for $number-of-columns columns
+$number-of-columns: 12;
+$gutter-size: 10px;
+$sm-min-width: 0px;
+$md-min-width: 780px;
+$lg-min-width: 1024px;
+
+.clearfix {
+  &::after, &::before {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 0 5px;
+}
+
+.row {
+  @extend .clearfix;
+  margin: -$gutter-size;
+}
+
+@mixin create-column ($n) {
+  width: ($n/$number-of-columns)*100%;
+  float: left;
+  padding: $gutter-size;
+}
+
+@media screen and (min-width: $sm-min-width) {
+  @for $i from 1 through $number-of-columns {
+    .col-sm-#{$i} {
+      @include create-column($i)
+    }
+  }
+}
+
+@media screen and (min-width: $lg-min-width) {
+  @for $i from 1 through $number-of-columns {
+    .col-lg-#{$i} {
+      @include create-column($i)
+    }
+  }
+}
+
+@media screen and (min-width: $md-min-width) {
+  @for $i from 1 through $number-of-columns {
+    .col-md-#{$i} {
+      @include create-column($i)
+    }
+  }
+}
+
