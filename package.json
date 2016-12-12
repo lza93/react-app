@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A basic app to get you up and running able to deploy to heroku",
   "main": "app.js",
+  "engines": {
+    "node": "7.0.0"
+  },
   "scripts": {
     "build": "webpack -p",
     "dev": "webpack -d --watch",
