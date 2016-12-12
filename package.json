@@ -9,6 +9,7 @@
   "scripts": {
     "build": "webpack -p",
     "dev": "webpack -d --watch",
+    "postinstall": "webpack -p",
     "seed-dev": "NODE_ENV=dev node seed/seed.js",
     "seed-test": "NODE_ENV=test node seed/seed.js",
     "start": "NODE_ENV=dev nodemon --harmony-async-await app.js || webpack -d --watch",
