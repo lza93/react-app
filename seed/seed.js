@@ -6,11 +6,17 @@ const runSeed = () => {
   db.authenticate()
     .then(() => db.sync({ force: true }))
     .then(() => User.create({
-      username: 'bob',
+      username: 'bb',
       email: 'bob@example.com',
       password: '123456',
     }))
-    .then(() => {
+    .then((user) => {
+      return user.update({username: 'bob'});
+    })
+    .then((user) => {
+      return user.checkPassword('12345s6');
+    })
+    .then((password) => {
       console.log('Successfully Seeded');
       process.exit(0);
     })
@@ -26,8 +32,8 @@ process.stdout.write(`You are about to reseed your database
   this? Type 'SEED' and press enter to continue
   >>`);
 process.stdin.on('data', (data) => {
-  data = data.toString().trim();
-  if (data === 'SEED') {
+  const input = data.toString().trim();
+  if (input === 'SEED') {
     runSeed();
   } else {
     process.stdout.write('Exiting without seeding');
