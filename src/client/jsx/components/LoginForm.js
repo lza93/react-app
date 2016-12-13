@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import axios from 'axios';
 
-class SignupForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: '',
       email: '',
       password: '',
-      passwordConfirmation: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,19 +16,20 @@ class SignupForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('/api/users', this.state)
+    axios.post('/api/sessions', this.state)
     .then((user) => {
-      // do something if user is successfully created
-      console.log("created", user.data);
+      // do something if user is successfully logged in
+      console.log("logged in", user.data);
       this.props.router.push('/'); // redirect route
     })
     .catch((err) => {
-      // do something if user is not successfully created
+      // do something if user is not successfully logged in
       console.log(err);
     });
   }
 
   handleChange(field, e) {
+    console.dir(this.props);
     this.setState({
       [field]: e.target.value,
     });
@@ -39,19 +39,8 @@ class SignupForm extends Component {
     return (
       <div className="container">
         <div className="col-md-4 col-md-offset-4 col-sm-12">
-          <h1>This is the signup form </h1>
+          <h1>This is the login form </h1>
           <form onSubmit={(e) => { this.handleSubmit(e); }}>
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                className="form-control"
-                id="username"
-                placeholder="Username"
-                value={this.state.username}
-                onChange={(e) => { this.handleChange('username', e); }}
-              />
-            </div>
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input
@@ -74,18 +63,7 @@ class SignupForm extends Component {
                 onChange={(e) => { this.handleChange('password', e); }}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="password-confirmation">Confirm Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password-confirmation"
-                placeholder="Confirm Password"
-                value={this.state.passwordConfirmation}
-                onChange={(e) => { this.handleChange('passwordConfirmation', e); }}
-              />
-            </div>
-            <button type="submit" className="btn btn-default">Signup</button>
+            <button type="submit" className="btn btn-default">Login</button>
           </form>
 
         </div>
@@ -94,4 +72,4 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default LoginForm;

@@ -8,6 +8,7 @@ import App from './components/App';
 import About from './components/About';
 import Home from './components/Home';
 import SignupForm from './components/SignupForm';
+import LoginForm from './components/LoginForm';
 
 const rootRouter = (
   <Router history={browserHistory} >
@@ -15,6 +16,7 @@ const rootRouter = (
       <IndexRoute component={Home} />
       <Route path="/about" component={About} />
       <Route path="/signup" component={SignupForm} />
+      <Route path="/login" component={LoginForm} />
     </Route>
   </Router>
 );
