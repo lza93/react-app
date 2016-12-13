@@ -11,7 +11,7 @@ const runSeed = () => {
       password: '123456',
     }))
     .then((user) => {
-      return user.update({username: 'bob'});
+      return user.update({ username: 'bob' });
     })
     .then((user) => {
       return user.checkPassword('12345s6');
