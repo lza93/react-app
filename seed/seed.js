@@ -1,8 +1,10 @@
 const db = require('../src/server/models/db');
 const User = db.models.user;
+const Role = db.models.role;
 
 const runSeed = () => {
   console.log('Starting Seed');
+  let user
   db.authenticate()
     .then(() => db.sync({ force: true }))
     .then(() => User.create({
@@ -10,13 +12,15 @@ const runSeed = () => {
       email: 'bob@example.com',
       password: '123456',
     }))
-    .then((user) => {
-      return user.update({ username: 'bob' });
+    .then(( _user) => {
+      user = _user; 
+      return Role.create({ role: 'admin' })
+
     })
-    .then((user) => {
-      return user.checkPassword('12345s6');
+    .then((role) => {
+      return role.addUser(user)
     })
-    .then((password) => {
+    .then(() => {
       console.log('Successfully Seeded');
       process.exit(0);
     })

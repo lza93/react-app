@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../../models/db').models.user;
+const whitelist = require('../utils/whitelist');
 
 router.use((req, res, next) => {
   console.log('got to /api/sessions routes');
@@ -24,9 +25,15 @@ router.post('/', (req, res, next) => {
         err.status = 401;
         throw err;
       }
-      res.json(user);
+      req.session.userId = user.id;
+      res.json(whitelist(user, ['id', 'email', 'username']));
     })
     .catch(next);
+});
+
+router.delete('/', (req, res, next) => {
+  req.session.userId = null;
+  res.status(204).json();
 });
 
 module.exports = router;

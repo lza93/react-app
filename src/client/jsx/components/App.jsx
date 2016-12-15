@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar';
+import NavbarContainer from '../containers/NavbarContainer';
 
 class App extends Component {
   constructor() {
@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <div id="app-root">
-        <Navbar />
+        <NavbarContainer />
         <div>
           { this.props.children ? this.props.children : null }
         </div>
