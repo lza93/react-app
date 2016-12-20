@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import SignupForm from '../components/SignupForm';
+import { signupUser } from '../actionCreators/userAuth';
+import errorConstants from '../errorConstants';
 
 class SignupFormContainer extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class SignupFormContainer extends Component {
       email: '',
       password: '',
       passwordConfirmation: '',
+      errors: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -18,16 +21,13 @@ class SignupFormContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('/api/users', this.state)
-    .then((user) => {
-      // do something if user is successfully created
-      console.log("created", user.data);
-      this.props.router.push('/'); // redirect route
-    })
-    .catch((err) => {
-      // do something if user is not successfully created
-      console.log(err);
-    });
+    this.props.signupUser(this.state)
+      .then(() => {
+        this.props.router.push('/');
+      })
+      .catch(() => {
+        errorConstants.addError(this, errorConstants.SIGNUP_ERROR);
+      });
   }
 
   handleChange(field, e) {
@@ -48,4 +48,19 @@ class SignupFormContainer extends Component {
 
 }
 
-export default SignupFormContainer;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signupUser(userData) {
+      return dispatch(signupUser(userData));
+    },
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupFormContainer);
