@@ -1,9 +1,13 @@
 import React from 'react';
+import ErrorMessages from './ErrorMessages';
 
 const LoginForm = props => (
   <div className="container">
     <div className="col-md-4 col-md-offset-4 col-sm-12">
       <h1>This is the login form </h1>
+        <ErrorMessages 
+          errors={props.errors}
+        /> 
       <form onSubmit={(e) => { props.handleSubmit(e); }}>
         <div className="form-group">
           <label htmlFor="email">Email</label>

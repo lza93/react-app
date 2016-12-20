@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import LoginForm from '../components/LoginForm';
+import { loginUser } from '../actionCreators/userAuth';
+import errorConstants from '../errorConstants';
 
 class LoginFormContainer extends Component {
   constructor(props) {
@@ -9,6 +11,7 @@ class LoginFormContainer extends Component {
     this.state = {
       email: '',
       password: '',
+      errors: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,20 +19,16 @@ class LoginFormContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('/api/sessions', this.state)
-    .then((user) => {
-      // do something if user is successfully logged in
-      console.log("logged in", user.data);
-      this.props.router.push('/'); // redirect route
-    })
-    .catch((err) => {
-      // do something if user is not successfully logged in
-      console.log(err);
-    });
+    this.props.loginUser(this.state)
+      .then(() => {
+        this.props.router.push('/');
+      })
+      .catch(() => {
+        errorConstants.addError(this, errorConstants.LOGIN_ERROR);
+      });
   }
 
   handleChange(field, e) {
-    console.dir(this.props);
     this.setState(
       {
         [field]: e.target.value,
@@ -38,7 +37,7 @@ class LoginFormContainer extends Component {
 
   render() {
     return (
-      <LoginForm 
+      <LoginForm
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
         {...this.state}
@@ -47,4 +46,19 @@ class LoginFormContainer extends Component {
   }
 }
 
-export default LoginFormContainer;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser(userData) {
+      return dispatch(loginUser(userData));
+    },
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer);

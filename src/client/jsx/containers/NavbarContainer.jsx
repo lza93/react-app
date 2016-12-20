@@ -1,31 +1,58 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import Navbar from '../components/Navbar';
+import { logoutUser } from '../actionCreators/userAuth';
 
 class NavbarContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userStatus: {
-        loggedIn: false,
-        userRoles: [],
-      },
+      loggedIn: props.user.loggedIn,
     };
     this.logout = this.logout.bind(this);
   }
 
-  logout() {
-    axios.delete('/api/sessions')
-      .then((res) => {
-        console.log('res', res, '\nres.data', res.data);
+  componentWillReceiveProps(nextProps) {
+    console.log("THIS IS nextProps", nextProps)
+    if (this.state.loggedIn !== nextProps.user.loggedIn) {
+      this.setState({ loggedIn: nextProps.user.loggedIn });
+    }
+  }
+
+  logout(e) {
+    e.preventDefault();
+    this.props.logoutUser()
+      .then(() => {
+        this.props.router.push('/');
+        return;
       })
+      .catch((err) => {
+        console.log('unhandled error logging out', err);
+      });
   }
 
   render() {
     return (
-      <Navbar logout={this.logout} {...this.state} />
+      <Navbar
+        logout={this.logout}
+        loggedIn={this.state.loggedIn || false}
+      />
     );
   }
 }
 
-export default NavbarContainer;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutUser() {
+      return dispatch(logoutUser());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);
