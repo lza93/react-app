@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../../models/db').models.user;
 const whitelist = require('../utils/whitelist');
+const errorMaker = require('../utils/errorMaker');
 
 router.use((req, res, next) => {
   console.log('got to /api/sessions routes');
@@ -27,6 +28,16 @@ router.post('/', (req, res, next) => {
       }
       req.session.userId = user.id;
       res.json(whitelist(user, ['id', 'email', 'username']));
+    })
+    .catch(next);
+});
+
+router.get('/me', (req, res, next) => {
+  if (!req.session.userId) { return res.json(); }
+  return User.findOne({ where: { id: req.session.userId } })
+    .then((user) => {
+      if (!user) { return res.send(errorMaker('no active session', 404)); }
+      return res.json(user);
     })
     .catch(next);
 });
