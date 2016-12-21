@@ -12,9 +12,11 @@ class LoginFormContainer extends Component {
       email: '',
       password: '',
       errors: [],
+      canSubmit: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.displayEmailError = this.displayEmailError.bind(this);
   }
 
   handleSubmit(e) {
@@ -32,7 +34,30 @@ class LoginFormContainer extends Component {
     this.setState(
       {
         [field]: e.target.value,
-      });
+      }, this.enableSubmit);
+  }
+
+  displayEmailError() {
+    const isValidEmail = this.validateEmail();
+    if (!isValidEmail) {
+      errorConstants.addError(this, errorConstants.EMAIL_SYNTAX);
+    } else {
+      errorConstants.removeError(this, errorConstants.EMAIL_SYNTAX);
+    }
+  }
+
+  enableSubmit() {
+    if (this.validateEmail() && this.state.password.length >= 6) {
+      this.setState({ canSubmit: true });
+    } else {
+      this.setState({ canSubmit: false });
+    }
+  }
+
+  validateEmail() {
+    // simple HTML5 regex to catch simple errors
+    const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    return EMAIL_REGEX.test(this.state.email);
   }
 
   render() {
@@ -40,6 +65,7 @@ class LoginFormContainer extends Component {
       <LoginForm
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
+        displayEmailError={this.displayEmailError}
         {...this.state}
       />
     );
