@@ -46,3 +46,20 @@ export function logoutUser() {
       return {};
     });
 }
+
+export function loginActiveSession() {
+  return dispatch => axios.get('/api/sessions/me')
+    .then((user) => {
+      if (!user.data) {
+        return logoutUser();
+      }
+      const newUser = {
+        ...initialState,
+        ...user.data,
+        loggedIn: true,
+      };
+      return dispatch(userAction(newUser));
+      // return newUser;
+    });
+}
+

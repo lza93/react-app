@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import NavbarContainer from '../containers/NavbarContainer';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      dummyState: '',
-    };
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    return this.props.loginActiveSession();
   }
 
   render() {
