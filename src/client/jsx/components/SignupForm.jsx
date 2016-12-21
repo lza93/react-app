@@ -17,6 +17,7 @@ const SignupForm = props => (
             placeholder="Username"
             value={props.username}
             onChange={(e) => { props.handleChange('username', e); }}
+            onBlur={() => props.displayUsernameError()}
           />
         </div>
         <div className="form-group">
@@ -28,6 +29,7 @@ const SignupForm = props => (
             placeholder="Email"
             value={props.email}
             onChange={(e) => { props.handleChange('email', e); }}
+            onBlur={() => props.displayEmailError()}
           />
         </div>
         <div className="form-group">
@@ -39,6 +41,7 @@ const SignupForm = props => (
             placeholder="Password"
             value={props.password}
             onChange={(e) => { props.handleChange('password', e); }}
+            onBlur={() => props.displayPasswordError()}
           />
         </div>
         <div className="form-group">
@@ -50,9 +53,10 @@ const SignupForm = props => (
             placeholder="Confirm Password"
             value={props.passwordConfirmation}
             onChange={(e) => { props.handleChange('passwordConfirmation', e); }}
+            onBlur={() => props.displayPasswordConfirmationError()}
           />
         </div>
-        <button type="submit" className="btn btn-default">Signup</button>
+        <button type="submit" disabled={!props.canSubmit} className="btn btn-default">Signup</button>
       </form>
 
     </div>

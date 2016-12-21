@@ -18,6 +18,7 @@ const LoginForm = props => (
             placeholder="Email"
             value={props.email}
             onChange={(e) => { props.handleChange('email', e); }}
+            onBlur={() => props.displayEmailError()}
           />
         </div>
         <div className="form-group">
@@ -31,7 +32,7 @@ const LoginForm = props => (
             onChange={(e) => { props.handleChange('password', e); }}
           />
         </div>
-        <button type="submit" className="btn btn-default">Login</button>
+        <button type="submit" className="btn btn-default" disabled={!props.canSubmit}>Login</button>
       </form>
     </div>
   </div>

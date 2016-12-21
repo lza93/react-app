@@ -30,7 +30,7 @@ const Navbar = ({ logout, loggedIn }) => (
           <li><Link to="/about">About</Link></li>
           { loggedIn ? null : renderSignupLink() }
           { loggedIn ? null : renderLoginLink() }
-          { !loggedIn ? renderLogoutButton(logout) : null }
+          { loggedIn ? renderLogoutButton(logout) : null }
         </ul>
       </div>
     </div>
