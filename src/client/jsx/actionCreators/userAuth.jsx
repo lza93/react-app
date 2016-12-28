@@ -1,11 +1,17 @@
 import axios from 'axios';
-import { SET_USER } from '../actionConstants';
+import { SET_USER, FINISHED_LOADING_USER } from '../actionConstants';
 import initialState from '../reducers/userInitialState';
 
 function userAction(user) {
   return {
     type: SET_USER,
     user,
+  };
+}
+
+function finshedLoadingUser() {
+  return {
+    type: FINISHED_LOADING_USER,
   };
 }
 
@@ -51,6 +57,7 @@ export function loginActiveSession() {
   return dispatch => axios.get('/api/sessions/me')
     .then((user) => {
       if (!user.data) {
+        dispatch(finshedLoadingUser());
         return logoutUser();
       }
       const newUser = {
@@ -58,8 +65,8 @@ export function loginActiveSession() {
         ...user.data,
         loggedIn: true,
       };
-      return dispatch(userAction(newUser));
-      // return newUser;
+      dispatch(userAction(newUser));
+      return dispatch(finshedLoadingUser());
     });
 }
 
