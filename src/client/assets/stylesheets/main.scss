@@ -2,3 +2,50 @@
 @import "grid"; 
 
 @import "navbar" */
+
+
+// $colorTan: 
+// $colorSuede: #B7AFA3;
+// $colorBlue1: #C1DAD6;
+// $colorGray: #F5FAFA;
+// $colorBlue2: #ACD1E9;
+// $colorBlue3: #6D929B;
+body {
+  background: #C1DAD6;
+}
+
+.navbar {
+  margin: -1px;
+  background: #E8D0A9;
+}
+
+.horizontal-info {
+  min-height: 25vh;
+  min-width: 100%;
+  line-height: 25vh;
+  &:nth-child(even) {
+    background: #C1DAD6;
+  }
+  &:nth-child(odd) {
+    background: #ACD1E9;
+  }
+}
+
+.paragraph-info {
+  display: inline-block;
+  line-height: 1.5em;
+  vertical-align: middle;
+  width: 100%;
+  padding: 0 30px;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.jumbotron {
+  margin-bottom: 0px;
+  background: #6D929B;
+}
+
+#home-info {
+  padding: 0;
+}
