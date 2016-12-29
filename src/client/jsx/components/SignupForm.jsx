@@ -3,7 +3,7 @@ import ErrorMessages from './ErrorMessages';
 const SignupForm = props => (
   <div className="container">
     <div className="col-md-4 col-md-offset-4 col-sm-12">
-      <h1>This is the signup form </h1>
+      <h1 className="text-center">Signup</h1>
       <ErrorMessages 
         errors={props.errors}
       />
@@ -56,7 +56,7 @@ const SignupForm = props => (
             onBlur={() => props.displayPasswordConfirmationError()}
           />
         </div>
-        <button type="submit" disabled={!props.canSubmit} className="btn btn-default">Signup</button>
+        <button type="submit" disabled={!props.canSubmit} className="btn btn-primary btn-lg">Signup</button>
       </form>
 
     </div>
