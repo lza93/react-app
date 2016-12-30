@@ -1,7 +1,7 @@
-const whitelist = require('../utils/whitelist');
+const whitelist = require('../../utils/whitelist');
 const User = require('../../models/db').models.user;
 const Role = require('../../models/db').models.role;
-const errorMaker = require('../utils/errorMaker');
+const stdErr = require('../../utils/standardErrors');
 
 module.exports = {
   setUser(req, res, next) {
@@ -29,7 +29,7 @@ module.exports = {
   },
   isLoggedIn(req, res, next) {
     if (!req.user) {
-      throw errorMaker('Not logged in', 401);
+      throw stdErr.notLoggedIn;
     } else {
       next();
     }
@@ -37,9 +37,9 @@ module.exports = {
   hasRole(role) {
     return function (req, res, next) {
       if (!req.user) {
-        throw errorMaker('Not logged in', 401);
+        throw stdErr.notLoggedIn;
       } else if (!req.user.roles.includes(role)) {
-        throw errorMaker('Not authorized', 401);
+        throw stdErr.unauthorized;
       } else {
         next();
       }

@@ -1,11 +1,10 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const path = require('path');
-
+const appConfig = require('../../../config/appConfig');
 
 const router = express.Router();
-const rootPath = path.join(__dirname, '../../../');
+const rootPath = appConfig.rootPath;
 
 router.use(session(
   {

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const User = require('../../models/db').models.user;
-const whitelist = require('../utils/whitelist');
-const errorMaker = require('../utils/errorMaker');
+const whitelist = require('../../utils/whitelist');
+const errorMaker = require('../../utils/errorMaker');
 
 router.use((req, res, next) => {
   console.log('got to /api/sessions routes');

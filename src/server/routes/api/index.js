@@ -6,7 +6,7 @@ const router = express.Router();
 router.use((req, res, next) => {
   console.log('got to the /api route');
   next();
-})
+});
 
 router.use('/users', usersRoutes);
 router.use('/sessions', sessionsRoutes);
