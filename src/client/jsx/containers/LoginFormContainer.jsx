@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { routerShape } from 'react-router';
 import LoginForm from '../components/LoginForm';
 import { loginUser } from '../actionCreators/userAuth';
 import errorConstants from '../errorConstants';
@@ -72,19 +73,19 @@ class LoginFormContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = state => ({
+  user: state.user,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loginUser(userData) {
-      return dispatch(loginUser(userData));
-    },
-  };
-};
-
+const mapDispatchToProps = dispatch => ({
+  loginUser(userData) {
+    return dispatch(loginUser(userData));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer);
+
+LoginFormContainer.propTypes = {
+  loginUser: PropTypes.func,
+  router: routerShape,
+};
