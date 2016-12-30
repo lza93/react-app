@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { routerShape } from 'react-router';
 import NavbarContainer from '../containers/NavbarContainer';
 import AppLoading from './AppLoading';
 
@@ -21,7 +22,6 @@ class App extends Component {
   }
 
   render() {
-
     return this.state.appLoading ?
       <AppLoading /> :
       (
@@ -31,13 +31,16 @@ class App extends Component {
             { this.props.children ? this.props.children : null }
           </div>
         </div>
-      )
+      );
   }
 }
 
-App.propTypes = {
-  children: React.PropTypes.element.isRequired,
-};
-
-
 export default App;
+
+
+App.propTypes = {
+  appLoading: PropTypes.bool,
+  children: React.PropTypes.element.isRequired,
+  loginActiveSession: PropTypes.func,
+  router: routerShape,
+};

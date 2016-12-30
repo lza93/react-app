@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 const ErrorMessage = ({ message, classNamesString }) => {
   classNamesString = classNamesString || 'text-danger';
@@ -7,6 +7,11 @@ const ErrorMessage = ({ message, classNamesString }) => {
       {message}
     </p>
   );
+};
+
+ErrorMessage.propTypes = {
+  message: PropTypes.string,
+  classNamesString: PropTypes.string,
 };
 
 export default class ErrorContainer extends Component {
@@ -22,14 +27,14 @@ export default class ErrorContainer extends Component {
       this.state = {
         errors: [],
       };
-    };
+    }
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.state.errors === newProps.errors) { return }
+    if (this.state.errors === newProps.errors) { return; }
     this.setState({
       errors: newProps.errors,
-    })
+    });
   }
 
   haveErrors() {
@@ -47,7 +52,15 @@ export default class ErrorContainer extends Component {
       <div id="errors-div">
         { this.haveErrors() ? this.renderErrors() : null }
       </div>
-    )
+    );
   }
 }
 
+export const errorsShape = {
+  id: PropTypes.string,
+  message: PropTypes.string,
+};
+
+ErrorContainer.propTypes = {
+  errors: PropTypes.arrayOf(PropTypes.shape(errorsShape)),
+};
