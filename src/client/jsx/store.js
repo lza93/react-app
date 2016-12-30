@@ -7,5 +7,5 @@ export default createStore(
   rootReducer,
   applyMiddleware(
     thunkMiddleware,
-  )
+  ),
 );
