@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { routerShape } from 'react-router';
 import Navbar from '../components/Navbar';
 import { logoutUser } from '../actionCreators/userAuth';
+import { userShape } from '../reducers/userInitialState';
 
 class NavbarContainer extends Component {
   constructor(props) {
@@ -13,7 +15,6 @@ class NavbarContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("THIS IS nextProps", nextProps)
     if (this.state.loggedIn !== nextProps.user.loggedIn) {
       this.setState({ loggedIn: nextProps.user.loggedIn });
     }
@@ -41,18 +42,20 @@ class NavbarContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = state => ({
+  user: state.user,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logoutUser() {
-      return dispatch(logoutUser());
-    },
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  logoutUser() {
+    return dispatch(logoutUser());
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);
+
+NavbarContainer.propTypes = {
+  logoutUser: PropTypes.func,
+  router: routerShape,
+  user: PropTypes.shape(userShape),
+};

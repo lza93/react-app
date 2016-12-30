@@ -1,13 +1,13 @@
-import React from 'react';
-import ErrorMessages from './ErrorMessages';
+import React, { PropTypes } from 'react';
+import ErrorMessages, { errorsShape } from './ErrorMessages';
 
 const LoginForm = props => (
   <div className="container">
     <div className="col-md-4 col-md-offset-4 col-sm-12">
       <h1 className="text-center">Login</h1>
-        <ErrorMessages 
-          errors={props.errors}
-        />
+      <ErrorMessages
+        errors={props.errors}
+      />
       <form onSubmit={(e) => { props.handleSubmit(e); }}>
         <div className="form-group">
           <label htmlFor="email">Email</label>
@@ -32,10 +32,24 @@ const LoginForm = props => (
             onChange={(e) => { props.handleChange('password', e); }}
           />
         </div>
-        <button type="submit" className="btn btn-primary btn-lg" disabled={!props.canSubmit}>Login</button>
+        <button
+          type="submit"
+          className="btn btn-primary btn-lg"
+          disabled={!props.canSubmit}
+        >
+          Login
+        </button>
       </form>
     </div>
   </div>
 );
 
 export default LoginForm;
+
+LoginForm.propTypes = {
+  errors: PropTypes.arrayOf(React.PropTypes.shape(errorsShape)),
+  email: PropTypes.string,
+  password: PropTypes.string,
+  canSubmit: PropTypes.bool,
+  handleChange: PropTypes.func,
+};

@@ -1,10 +1,11 @@
-import React from 'react';
-import ErrorMessages from './ErrorMessages';
+import React, { PropTypes } from 'react';
+import ErrorMessages, { errorsShape } from './ErrorMessages';
+
 const SignupForm = props => (
   <div className="container">
     <div className="col-md-4 col-md-offset-4 col-sm-12">
       <h1 className="text-center">Signup</h1>
-      <ErrorMessages 
+      <ErrorMessages
         errors={props.errors}
       />
       <form onSubmit={(e) => { props.handleSubmit(e); }}>
@@ -56,7 +57,14 @@ const SignupForm = props => (
             onBlur={() => props.displayPasswordConfirmationError()}
           />
         </div>
-        <button type="submit" disabled={!props.canSubmit} className="btn btn-primary btn-lg">Signup</button>
+        <button
+          type="submit"
+          disabled={!props.canSubmit}
+          className="btn btn-primary
+          btn-lg"
+        >
+          Signup
+        </button>
       </form>
 
     </div>
@@ -64,3 +72,13 @@ const SignupForm = props => (
 );
 
 export default SignupForm;
+
+SignupForm.propTypes = {
+  errors: PropTypes.arrayOf(PropTypes.shape(errorsShape)),
+  username: PropTypes.string,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  passwordConfirmation: PropTypes.string,
+  displayPasswordConfirmationError: PropTypes.func,
+  canSubmit: PropTypes.bool,
+};

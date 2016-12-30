@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { routerShape } from 'react-router';
 import SignupForm from '../components/SignupForm';
 import { signupUser } from '../actionCreators/userAuth';
 import errorConstants from '../errorConstants';
@@ -127,19 +128,20 @@ class SignupFormContainer extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = state => ({
+  user: state.user,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signupUser(userData) {
-      return dispatch(signupUser(userData));
-    },
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  signupUser(userData) {
+    return dispatch(signupUser(userData));
+  },
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupFormContainer);
+
+SignupFormContainer.propTypes = {
+  signupUser: PropTypes.func,
+  router: routerShape,
+};

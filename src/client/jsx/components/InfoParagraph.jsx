@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const InfoParagraph = ({ content, horizontalInfoStyle, paragraphInfoStyle }) => (
   <div className="horizontal-info" style={horizontalInfoStyle}>
@@ -16,3 +16,10 @@ export const renderParagraphs = (content, horizontalInfoStyle, paragraphInfoStyl
       paragraphInfoStyle={paragraphInfoStyle}
       key={index}
     />);
+
+
+InfoParagraph.propTypes = {
+  content: PropTypes.string,
+  horizontalInfoStyle: PropTypes.objectOf(PropTypes.string),
+  paragraphInfoStyle: PropTypes.objectOf(PropTypes.string),
+};

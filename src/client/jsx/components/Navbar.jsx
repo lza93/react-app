@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const renderSignupLink = () => (
@@ -39,3 +39,8 @@ const Navbar = ({ logout, loggedIn }) => (
 
 
 export default Navbar;
+
+Navbar.propTypes = {
+  logout: PropTypes.func,
+  loggedIn: PropTypes.bool,
+};
