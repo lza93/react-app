@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-const ErrorMessage = ({ message, classNamesString }) => {
+export const ErrorMessage = ({ message, classNamesString }) => {
   classNamesString = classNamesString || 'text-danger';
   return (
     <p className={classNamesString}>
