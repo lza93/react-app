@@ -12,7 +12,7 @@ Please feel free to add your suggestions, bearing in mind the purpose of this ap
 
 
 const Home = () => (
-  <div>
+  <div id="home">
     <div className="jumbotron">
       <div className="container">
         <h1 className="display-3 text-center">React Staring Point App</h1>
@@ -22,7 +22,7 @@ const Home = () => (
         </p>
       </div>
     </div>
-    <div className="negate-jumbotron" id="home-info">
+    <div id="home-info">
       {renderParagraphs(explanatoryParagraphs)}
     </div>
   </div>
