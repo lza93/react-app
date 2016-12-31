@@ -1,13 +1,16 @@
-const path = require('path');
+// NO LONGER IN USE, CHANGED IT FOR EXPORTING AN OBJECT
+// THAT CONTAINS APP VARIABLES
 
-const rootPath = path.join(__dirname, '../');
+// const path = require('path');
 
-if (process.env.NODE_ENV === 'test') {
-  process.dbURL = 'postgres://localhost:5432/my-react-app-test';
-}
+// const rootPath = path.join(__dirname, '../');
 
-module.exports = (app) => {
-  app.set('rootPath', rootPath);
-  app.set('indexHTML', `${rootPath}/client/index.html`);
-  app.set('PORT', process.env.PORT || 3001);
-};
+// if (process.env.NODE_ENV === 'test') {
+//   process.dbURL = 'postgres://localhost:5432/my-react-app-test';
+// }
+
+// module.exports = (app) => {
+//   app.set('rootPath', rootPath);
+//   app.set('indexHTML', `${rootPath}/client/index.html`);
+//   app.set('PORT', process.env.PORT || 3001);
+// };

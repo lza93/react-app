@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const User = require('../../models/db').models.user;
 const Auth = require('../middleware/authMiddleware');
-const whitelist = require('../utils/whitelist');
+const whitelist = require('../../utils/whitelist');
 
 router.use((req, res, next) => {
   console.log('got to /api/users route');

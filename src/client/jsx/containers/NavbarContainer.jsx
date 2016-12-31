@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerShape } from 'react-router';
 import Navbar from '../components/Navbar';
-import { logoutUser } from '../actionCreators/userAuth';
-import { userShape } from '../reducers/userInitialState';
+import { logoutUser } from '../redux/actionCreators/userAuth';
+import { userShape } from '../redux/reducers/userInitialState';
 
 class NavbarContainer extends Component {
   constructor(props) {

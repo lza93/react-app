@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerShape } from 'react-router';
 import LoginForm from '../components/LoginForm';
-import { loginUser } from '../actionCreators/userAuth';
-import errorConstants from '../errorConstants';
+import { loginUser } from '../redux/actionCreators/userAuth';
+import errorConstants, { addError, removeError } from '../constants/errorConstants';
 
 class LoginFormContainer extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class LoginFormContainer extends Component {
         this.props.router.push('/');
       })
       .catch(() => {
-        errorConstants.addError(this, errorConstants.LOGIN_ERROR);
+        addError(this, errorConstants.LOGIN_ERROR);
       });
   }
 
@@ -41,9 +41,9 @@ class LoginFormContainer extends Component {
   displayEmailError() {
     const isValidEmail = this.validateEmail();
     if (!isValidEmail) {
-      errorConstants.addError(this, errorConstants.EMAIL_SYNTAX);
+      addError(this, errorConstants.EMAIL_SYNTAX);
     } else {
-      errorConstants.removeError(this, errorConstants.EMAIL_SYNTAX);
+      removeError(this, errorConstants.EMAIL_SYNTAX);
     }
   }
 
