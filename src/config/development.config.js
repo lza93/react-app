@@ -1,6 +1,6 @@
 console.log('loading development config');
 
-process.DATABASE_URL = 'postgres://localhost:5432/my-react-app';
+process.env.DATABASE_URL = 'postgres://localhost:5432/my-react-app';
 process.env.PORT = 3001;
 
 module.exports = {
