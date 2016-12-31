@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const InfoParagraph = ({ content, horizontalInfoStyle, paragraphInfoStyle }) => (
-  <div className="horizontal-info" style={horizontalInfoStyle}>
+  <div className="horizontal-info paragraph-info" style={horizontalInfoStyle}>
     <p className="paragraph-info text-left" style={paragraphInfoStyle}>{content}</p>
   </div>
 );
