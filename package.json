@@ -10,9 +10,9 @@
     "build": "webpack -p",
     "dev": "webpack -d --watch",
     "postinstall": "webpack -p",
-    "seed-dev": "NODE_ENV=dev node seed/seed.js",
+    "seed-dev": "NODE_ENV=development node seed/seed.js",
     "seed-test": "NODE_ENV=test node seed/seed.js",
-    "start": "NODE_ENV=dev nodemon --harmony-async-await app.js || webpack -d --watch",
+    "start": "NODE_ENV=development nodemon --harmony-async-await app.js",
     "test": "NODE_ENV=test mocha tests tests/client/helpers/globalTestVariables.js --harmony-async-await --recursive"
   },
   "keywords": [],

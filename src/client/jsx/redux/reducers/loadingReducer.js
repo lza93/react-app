@@ -1,5 +1,5 @@
 import loadingInitialState from './loadingInitialState';
-import { FINISHED_LOADING_USER } from '../actionConstants';
+import { FINISHED_LOADING_USER } from '../../constants/actionConstants';
 
 export default function (state = loadingInitialState, action) {
   switch (action.type) {

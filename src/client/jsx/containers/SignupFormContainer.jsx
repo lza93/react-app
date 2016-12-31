@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerShape } from 'react-router';
 import SignupForm from '../components/SignupForm';
-import { signupUser } from '../actionCreators/userAuth';
-import errorConstants from '../errorConstants';
+import { signupUser } from '../redux/actionCreators/userAuth';
+import errorConstants, { addError, removeError } from '../constants/errorConstants';
 
 class SignupFormContainer extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class SignupFormContainer extends Component {
         this.props.router.push('/');
       })
       .catch(() => {
-        errorConstants.addError(this, errorConstants.SIGNUP_ERROR);
+        addError(this, errorConstants.SIGNUP_ERROR);
       });
   }
 
@@ -45,36 +45,36 @@ class SignupFormContainer extends Component {
   displayEmailError() {
     const isValidEmail = this.validateEmail();
     if (!isValidEmail) {
-      errorConstants.addError(this, errorConstants.EMAIL_SYNTAX);
+      addError(this, errorConstants.EMAIL_SYNTAX);
     } else {
-      errorConstants.removeError(this, errorConstants.EMAIL_SYNTAX);
+      removeError(this, errorConstants.EMAIL_SYNTAX);
     }
   }
 
   displayUsernameError() {
     const isValidUsername = this.validateUsername();
     if (!isValidUsername) {
-      errorConstants.addError(this, errorConstants.USERNAME_SYNTAX);
+      addError(this, errorConstants.USERNAME_SYNTAX);
     } else {
-      errorConstants.removeError(this, errorConstants.USERNAME_SYNTAX);
+      removeError(this, errorConstants.USERNAME_SYNTAX);
     }
   }
 
   displayPasswordError() {
     const isValidPassword = this.validatePassword();
     if (!isValidPassword) {
-      errorConstants.addError(this, errorConstants.PASSWORD_SYNTAX);
+      addError(this, errorConstants.PASSWORD_SYNTAX);
     } else {
-      errorConstants.removeError(this, errorConstants.PASSWORD_SYNTAX);
+      removeError(this, errorConstants.PASSWORD_SYNTAX);
     }
   }
 
   displayPasswordConfirmationError() {
     const isValidPasswordConfirmation = this.validatePasswordConfirmation();
     if (!isValidPasswordConfirmation) {
-      errorConstants.addError(this, errorConstants.PASSWORD_CONFIRMATION_ERROR);
+      addError(this, errorConstants.PASSWORD_CONFIRMATION_ERROR);
     } else {
-      errorConstants.removeError(this, errorConstants.PASSWORD_CONFIRMATION_ERROR);
+      removeError(this, errorConstants.PASSWORD_CONFIRMATION_ERROR);
     }
   }
 

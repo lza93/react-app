@@ -28,11 +28,11 @@ const PASSWORD_CONFIRMATION_ERROR = {
   message: 'the password confirmation should match the password',
 };
 
-function noDuplicateIds(arrayToCheck, objectToAdd) {
+export function noDuplicateIds(arrayToCheck, objectToAdd) {
   return !arrayToCheck.some(objectInArray => objectInArray.id === objectToAdd.id);
 }
 
-function addError(contextThis, errorToAdd) {
+export function addError(contextThis, errorToAdd) {
   if (noDuplicateIds(contextThis.state.errors, errorToAdd)) {
     const newStateErrors = [...contextThis.state.errors, errorToAdd];
     contextThis.setState({
@@ -41,7 +41,7 @@ function addError(contextThis, errorToAdd) {
   }
 }
 
-function removeError(contextThis, errorToRemove) {
+export function removeError(contextThis, errorToRemove) {
   const indexOfError = contextThis.state.errors.findIndex(
     errorInState => errorInState.id === errorToRemove.id // eslint-disable-line
   );
@@ -62,7 +62,4 @@ export default {
   USERNAME_SYNTAX,
   PASSWORD_SYNTAX,
   PASSWORD_CONFIRMATION_ERROR,
-  noDuplicateIds,
-  addError,
-  removeError,
 };
