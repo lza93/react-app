@@ -39,5 +39,16 @@ describe('<App />', () => {
       wrapper = shallow(<App {...AppProps} />);
       expect(wrapper.find(NavbarContainer)).to.have.length(1);
     });
+
+    it('renders children passed in component', () => {
+      wrapper = shallow(
+        <App {...AppProps} >
+          <div className="app-child" id="app-child-1" />
+          <div className="app-child" id="app-child-2" />
+        </App>);
+      expect(wrapper.find('#app-child-1')).to.have.length(1);
+      expect(wrapper.find('#app-child-2')).to.have.length(1);
+      expect(wrapper.find('.app-child')).to.have.length(2);
+    });
   });
 });

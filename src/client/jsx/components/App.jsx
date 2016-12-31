@@ -40,7 +40,10 @@ export default App;
 
 App.propTypes = {
   appLoading: PropTypes.bool,
-  children: React.PropTypes.element,
+  children: React.PropTypes.oneOfType([
+    PropTypes.arrayOf(React.PropTypes.node),
+    PropTypes.node,
+  ]),
   loginActiveSession: PropTypes.func,
   router: routerShape,
 };
