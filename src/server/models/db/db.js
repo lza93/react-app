@@ -5,7 +5,7 @@ const logger = (query) => {
   console.log('\n---DB QUERY---\n', query, '\n---|||---\n');
 };
 
-const db = new Sequelize(process.dbURL, {
+const db = new Sequelize(process.DATABASE_URL, {
   logging: process.env.NODE_ENV === 'test' ? false : logger,
 });
 

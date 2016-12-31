@@ -1,6 +1,6 @@
 console.log('loading testing config');
 
-process.dbURL = 'postgres://localhost:5432/my-react-app-test';
+process.DATABASE_URL = 'postgres://localhost:5432/my-react-app-test';
 process.env.PORT = 3001;
 
 
