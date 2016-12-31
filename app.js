@@ -1,7 +1,7 @@
 const express = require('express');
-const router = require('./src/server/routes');
 const appConfig = require('./src/config/appConfig');
 const db = require('./src/server/models/db'); // eslint-disable-line
+const router = require('./src/server/routes');
 
 const app = express();
 

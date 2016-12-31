@@ -8,7 +8,7 @@ const rootPath = appConfig.rootPath;
 
 router.use(session(
   {
-    secret: 'shhhh!-changethis',
+    secret: appConfig.sessionSecret,
     resave: false,
     saveUninitialized: true,
   }));
