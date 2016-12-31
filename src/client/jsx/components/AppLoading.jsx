@@ -17,7 +17,7 @@ export default () => {
   };
 
   return (
-    <div style={loadingDivStyle}>
+    <div id="app-loading" style={loadingDivStyle}>
       <h1 style={LoadingTextStyle}>LOADING APP</h1>
     </div>
   );

@@ -15,7 +15,7 @@ const horizontalStyle = {
 };
 
 const About = () => (
-  <div>
+  <div id="about-page">
     <h1 className="text-center">About React-App</h1>
     {renderParagraphs(paragraphs, horizontalStyle)}
   </div>
