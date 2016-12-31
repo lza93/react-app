@@ -1,5 +1,5 @@
 require('babel-register')();
-
+require('../../../src/config/appConfig');
 
 // const jsdom = require('jsdom');
 

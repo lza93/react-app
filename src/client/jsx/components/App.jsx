@@ -40,7 +40,7 @@ export default App;
 
 App.propTypes = {
   appLoading: PropTypes.bool,
-  children: React.PropTypes.element.isRequired,
+  children: React.PropTypes.element,
   loginActiveSession: PropTypes.func,
   router: routerShape,
 };
