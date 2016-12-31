@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import ErrorMessages, { errorsShape } from './ErrorMessages';
 
 const LoginForm = props => (
-  <div className="container">
+  <div className="container" id="login-form">
     <div className="col-md-4 col-md-offset-4 col-sm-12">
       <h1 className="text-center">Login</h1>
       <ErrorMessages
