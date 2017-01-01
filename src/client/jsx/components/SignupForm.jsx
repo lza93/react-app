@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import ErrorMessages, { errorsShape } from './ErrorMessages';
 
 const SignupForm = props => (
-  <div className="container">
+  <div className="container" id="signup-form">
     <div className="col-md-4 col-md-offset-4 col-sm-12">
       <h1 className="text-center">Signup</h1>
       <ErrorMessages
@@ -81,4 +81,6 @@ SignupForm.propTypes = {
   passwordConfirmation: PropTypes.string,
   displayPasswordConfirmationError: PropTypes.func,
   canSubmit: PropTypes.bool,
+  handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
 };

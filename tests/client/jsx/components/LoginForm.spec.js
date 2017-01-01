@@ -40,7 +40,7 @@ describe('<LoginForm /> Component', () => {
       expect(wrapper.find(ErrorMessages)).to.have.length(1);
     });
 
-    it('initially renders email and password input, and disabled button fields', () => {
+    it('initially renders email and password input fields, and a disabled button', () => {
       wrapper = shallow(<LoginForm {...props} />);
       expect(wrapper.find('input[type="email"]')).to.have.length(1);
       expect(wrapper.find('input[type="password"]')).to.have.length(1);
@@ -61,7 +61,7 @@ describe('<LoginForm /> Component', () => {
   });
 
   describe('Simulating User Events', () => {
-    it('should call props.handleChange for changes in email and passowrd', () => {
+    it('calls props.handleChange for changes in email and passowrd', () => {
       sandbox.spy(props, 'handleChange');
       wrapper = shallow(<LoginForm {...props} />);
       const emailInput = wrapper.find('input[type="email"]');
@@ -73,7 +73,7 @@ describe('<LoginForm /> Component', () => {
       expect(props.handleChange.calledTwice).to.equal(true);
     });
 
-    it('should call handleSubmit when form is submitted', () => {
+    it('calls handleSubmit when form is submitted', () => {
       sandbox.spy(props, 'handleSubmit');
       wrapper = shallow(<LoginForm {...props} />);
       const form = wrapper.find('form');
