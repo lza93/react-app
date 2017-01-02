@@ -4,6 +4,7 @@ import ErrorMessageProps from './propsFactories/ErrorMessage.propsFactory';
 import InfoParagraphProps from './propsFactories/InfoParagraph.propsFactory';
 import LoginFormProps from './propsFactories/LoginForm.propsFactory';
 import NavbarProps from './propsFactories/Navbar.propsFactory';
+import SignupFormProps from './propsFactories/SignupForm.propsFactory';
 
 const propsList = {
   AppProps,
@@ -12,6 +13,7 @@ const propsList = {
   InfoParagraphProps,
   LoginFormProps,
   NavbarProps,
+  SignupFormProps,
 };
 
 export default (propsName, emptyOrFilled, newProps) => {

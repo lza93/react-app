@@ -1,2 +1,10 @@
-throw new Error('Setup navbar and signupform factories');
-// setup navbar props factory
+export default {
+  empty: {
+    logout: () => {},
+    loggedIn: false,
+  },
+  filled: {
+    logout: () => {},
+    loggedIn: true,
+  },
+};

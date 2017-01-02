@@ -4,14 +4,12 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import Navbar from '../../../../src/client/jsx/components/Navbar';
+import propsFactory from '../../../helpers/propsFactory';
 
 describe('<Navbar /> Component', () => {
   let wrapper;
   let sandbox;
-  const props = {
-    loggedIn: false,
-    logout: () => {},
-  };
+  const props = propsFactory('NavbarProps', 'empty');
   const loggedInProps = Object.assign({}, props, { loggedIn: true });
 
   beforeEach((done) => {
