@@ -3,13 +3,12 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import App from '../../../../src/client/jsx/components/App';
+
 import NavbarContainer from '../../../../src/client/jsx/containers/NavbarContainer';
 import AppLoading from '../../../../src/client/jsx/components/AppLoading';
+import propsFactory from '../../../helpers/propsFactory';
 
-const AppProps = {
-  appLoading: false,
-  loginActiveSession: () => {},
-};
+const AppProps = propsFactory('AppProps', 'empty');
 
 describe('<App />', () => {
   let wrapper;
@@ -28,11 +27,13 @@ describe('<App />', () => {
       const loadingProps = Object.assign({}, AppProps, { appLoading: true });
       wrapper = shallow(<App {...loadingProps} />);
       expect(wrapper.find(AppLoading)).to.have.length(1);
+      expect(wrapper.find('#app-root')).to.have.length(0);
     });
 
     it('renders App component', () => {
       wrapper = shallow(<App {...AppProps} />);
       expect(wrapper.find('#app-root')).to.have.length(1);
+      expect(wrapper.find(AppLoading)).to.have.length(0);
     });
 
     it('renders Navbar component', () => {
