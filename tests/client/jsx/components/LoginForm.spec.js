@@ -5,19 +5,12 @@ import sinon from 'sinon';
 
 import LoginForm from '../../../../src/client/jsx/components/LoginForm';
 import ErrorMessages from '../../../../src/client/jsx/components/ErrorMessages';
+import propsFactory from '../../../helpers/propsFactory';
 
 describe('<LoginForm /> Component', () => {
   let sandbox;
   let wrapper;
-  const props = {
-    handleChange: () => {},
-    handleSubmit: () => {},
-    displayEmailError: () => {},
-    email: '',
-    password: '',
-    errors: [],
-    canSubmit: false,
-  };
+  const props = propsFactory('LoginFormProps', 'empty');
 
   beforeEach((done) => {
     sandbox = sinon.sandbox.create();
@@ -42,26 +35,22 @@ describe('<LoginForm /> Component', () => {
 
     it('initially renders email and password input fields, and a disabled button', () => {
       wrapper = shallow(<LoginForm {...props} />);
-      expect(wrapper.find('input[type="email"]')).to.have.length(1);
-      expect(wrapper.find('input[type="password"]')).to.have.length(1);
+      expect(wrapper.find('input[type="email"][value=""]')).to.have.length(1);
+      expect(wrapper.find('input[type="password"][value=""]')).to.have.length(1);
       expect(wrapper.find('button[type="submit"][disabled=true]')).to.have.length(1);
     });
 
     it('appropriately renders filled email, password, and enables button with props', () => {
-      const updatedProps = Object.assign({}, props, {
-        email: 'bob@example.com',
-        password: 'Password1!',
-        canSubmit: true,
-      });
+      const updatedProps = propsFactory('LoginFormProps', 'filled');
       wrapper = shallow(<LoginForm {...updatedProps} />);
-      expect(wrapper.find('input[type="email"][value="bob@example.com"]')).to.have.length(1);
-      expect(wrapper.find('input[type="password"][value="Password1!"]')).to.have.length(1);
+      expect(wrapper.find(`input[type="email"][value="${updatedProps.email}"]`)).to.have.length(1);
+      expect(wrapper.find(`input[type="password"][value="${updatedProps.password}"]`)).to.have.length(1);
       expect(wrapper.find('button[type="submit"][disabled=false]')).to.have.length(1);
     });
   });
 
   describe('Simulating User Events', () => {
-    it('calls props.handleChange for changes in email and passowrd', () => {
+    it('calls handleChange for changes in email and passowrd', () => {
       sandbox.spy(props, 'handleChange');
       wrapper = shallow(<LoginForm {...props} />);
       const emailInput = wrapper.find('input[type="email"]');
@@ -71,6 +60,17 @@ describe('<LoginForm /> Component', () => {
       expect(props.handleChange.calledOnce).to.equal(true);
       passwordInput.simulate('change');
       expect(props.handleChange.calledTwice).to.equal(true);
+    });
+
+    it('calls displayEmailError onBlur', () => {
+      sandbox.spy(props, 'displayEmailError');
+      wrapper = shallow(<LoginForm {...props} />);
+      const emailInput = wrapper.find('input[type="email"]');
+
+      emailInput.simulate('blur');
+      expect(props.displayEmailError.calledOnce).to.equal(true);
+      emailInput.simulate('blur');
+      expect(props.displayEmailError.calledTwice).to.equal(true);
     });
 
     it('calls handleSubmit when form is submitted', () => {
