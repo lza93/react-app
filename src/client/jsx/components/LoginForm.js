@@ -52,4 +52,5 @@ LoginForm.propTypes = {
   password: PropTypes.string,
   canSubmit: PropTypes.bool,
   handleChange: PropTypes.func,
+  displayEmailError: PropTypes.func,
 };

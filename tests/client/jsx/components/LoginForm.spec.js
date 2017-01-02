@@ -50,7 +50,7 @@ describe('<LoginForm /> Component', () => {
   });
 
   describe('Simulating User Events', () => {
-    it('calls props.handleChange for changes in email and passowrd', () => {
+    it('calls handleChange for changes in email and passowrd', () => {
       sandbox.spy(props, 'handleChange');
       wrapper = shallow(<LoginForm {...props} />);
       const emailInput = wrapper.find('input[type="email"]');
@@ -60,6 +60,17 @@ describe('<LoginForm /> Component', () => {
       expect(props.handleChange.calledOnce).to.equal(true);
       passwordInput.simulate('change');
       expect(props.handleChange.calledTwice).to.equal(true);
+    });
+
+    it('calls displayEmailError onBlur', () => {
+      sandbox.spy(props, 'displayEmailError');
+      wrapper = shallow(<LoginForm {...props} />);
+      const emailInput = wrapper.find('input[type="email"]');
+
+      emailInput.simulate('blur');
+      expect(props.displayEmailError.calledOnce).to.equal(true);
+      emailInput.simulate('blur');
+      expect(props.displayEmailError.calledTwice).to.equal(true);
     });
 
     it('calls handleSubmit when form is submitted', () => {
