@@ -33,25 +33,21 @@ describe('<LoginFormContainer />', () => {
   describe('Class Methods', () => {
     let event;
     describe('handleSubmit', () => {
-      xit('calls loginUser when called', () => {
-        // throw new Error('decide to run through error chain on handlesubmit or stub it out');
+      it('calls loginUser when called', () => {
         sandbox.spy(LoginFormContainerProps, 'loginUser');
-        sandbox.spy(LoginFormContainerProps.router, 'push');
         wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
-        const handleSubmit = wrapper.instance().handleSubmit;
         event = createBasicEvent();
 
-        handleSubmit(event);
+        wrapper.instance().handleSubmit(event);
         expect(LoginFormContainerProps.loginUser.calledOnce).to.equal(true);
       });
 
-      xit('calls props.router.push when loginUser is successful', () => {
+      it('calls props.router.push when loginUser is successful', () => {
         sandbox.spy(LoginFormContainerProps.router, 'push');
         wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
-        const handleSubmit = wrapper.instance().handleSubmit;
         event = createBasicEvent();
 
-        return handleSubmit(event)
+        return wrapper.instance().handleSubmit(event)
           .then(() => {
             expect(LoginFormContainerProps.router.push.calledOnce).to.equal(true);
           });
@@ -123,7 +119,7 @@ describe('<LoginFormContainer />', () => {
         sandbox.stub(wrapper.instance(), 'validateEmail').returns(true);
         wrapper.instance().displayEmailError();
         expect(errorConstants.removeError.calledOnce).to.equal(true);
-      })   
+      });
     });
 
     describe('enableSubmit', () => {
@@ -170,30 +166,6 @@ describe('<LoginFormContainer />', () => {
         wrapper.setState({ email: 'bobloblawATlawDOTblog' });
         expect(instance.validateEmail()).to.equal(false);
       });
-    });
-  });
-
-  describe('Lifecycle Tests', () => {
-    xit('sets state appropriately on load', () => {
-      wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
-      expect(wrapper.state().appLoading).to.equal(LoginFormContainerProps.appLoading);
-    });
-
-    xit('calls loginActiveSession before mounting', () => {
-      sandbox.spy(LoginFormContainerProps, 'loginActiveSession');
-      wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
-      expect(LoginFormContainerProps.loginActiveSession.calledOnce).to.equal(true);
-    });
-
-    xit('calls setState and sets the new state when receiving new props only', () => {
-      wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
-      sandbox.spy(Component.prototype, 'setState');
-      wrapper.setProps({ appLoading: true });
-      wrapper.setProps({ appLoading: true });
-      expect(Component.prototype.setState.calledOnce).to.equal(true);
-      wrapper.setProps({ appLoading: false });
-      expect(Component.prototype.setState.calledTwice).to.equal(true);
-      expect(wrapper.state('appLoading')).to.equal(false);
     });
   });
 });
