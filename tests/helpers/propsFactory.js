@@ -4,6 +4,7 @@ import ErrorMessageProps from './propsFactories/ErrorMessage.propsFactory';
 import InfoParagraphProps from './propsFactories/InfoParagraph.propsFactory';
 import LoginFormContainerProps from './propsFactories/LoginFormContainer.propsFactory';
 import LoginFormProps from './propsFactories/LoginForm.propsFactory';
+import NavbarContainerProps from './propsFactories/NavbarContainer.propsFactory';
 import NavbarProps from './propsFactories/Navbar.propsFactory';
 import SignupFormProps from './propsFactories/SignupForm.propsFactory';
 
@@ -14,6 +15,7 @@ const propsList = {
   InfoParagraphProps,
   LoginFormContainerProps,
   LoginFormProps,
+  NavbarContainerProps,
   NavbarProps,
   SignupFormProps,
 };

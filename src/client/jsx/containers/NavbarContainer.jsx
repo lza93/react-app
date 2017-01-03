@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import { logoutUser } from '../redux/actionCreators/userAuth';
 import { userShape } from '../redux/reducers/userInitialState';
 
-class NavbarContainer extends Component {
+export class NavbarContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,13 +22,13 @@ class NavbarContainer extends Component {
 
   logout(e) {
     e.preventDefault();
-    this.props.logoutUser()
+    return this.props.logoutUser()
       .then(() => {
         this.props.router.push('/');
         return;
       })
       .catch((err) => {
-        console.log('unhandled error logging out', err);
+        if (process.env.NODE_ENV !== 'test') { console.log('unhandled error logging out', err); }
       });
   }
 
