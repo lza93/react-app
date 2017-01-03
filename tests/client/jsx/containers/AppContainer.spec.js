@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { AppContainer } from '../../../../src/client/jsx/containers/AppContainer';
 
+import { AppContainer } from '../../../../src/client/jsx/containers/AppContainer';
 import NavbarContainer from '../../../../src/client/jsx/containers/NavbarContainer';
 import AppLoading from '../../../../src/client/jsx/components/AppLoading';
 import propsFactory from '../../../helpers/propsFactory';

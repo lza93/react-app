@@ -5,7 +5,7 @@ import LoginForm from '../components/LoginForm';
 import { loginUser } from '../redux/actionCreators/userAuth';
 import errorConstants, { addError, removeError } from '../constants/errorConstants';
 
-class LoginFormContainer extends Component {
+export class LoginFormContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -22,13 +22,9 @@ class LoginFormContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.loginUser(this.state)
-      .then(() => {
-        this.props.router.push('/');
-      })
-      .catch(() => {
-        addError(this, errorConstants.LOGIN_ERROR);
-      });
+    return this.props.loginUser(this.state)
+      .then(() => this.props.router.push('/'))
+      .catch(() => addError(this, errorConstants.LOGIN_ERROR));
   }
 
   handleChange(field, e) {

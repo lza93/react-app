@@ -2,6 +2,7 @@ import AppContainerProps from './propsFactories/AppContainer.propsFactory';
 import ErrorMessagesProps from './propsFactories/ErrorMessages.propsFactory';
 import ErrorMessageProps from './propsFactories/ErrorMessage.propsFactory';
 import InfoParagraphProps from './propsFactories/InfoParagraph.propsFactory';
+import LoginFormContainerProps from './propsFactories/LoginFormContainer.propsFactory';
 import LoginFormProps from './propsFactories/LoginForm.propsFactory';
 import NavbarProps from './propsFactories/Navbar.propsFactory';
 import SignupFormProps from './propsFactories/SignupForm.propsFactory';
@@ -11,6 +12,7 @@ const propsList = {
   ErrorMessageProps,
   ErrorMessagesProps,
   InfoParagraphProps,
+  LoginFormContainerProps,
   LoginFormProps,
   NavbarProps,
   SignupFormProps,
