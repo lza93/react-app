@@ -1,4 +1,4 @@
-import AppProps from './propsFactories/App.propsFactory';
+import AppContainerProps from './propsFactories/AppContainer.propsFactory';
 import ErrorMessagesProps from './propsFactories/ErrorMessages.propsFactory';
 import ErrorMessageProps from './propsFactories/ErrorMessage.propsFactory';
 import InfoParagraphProps from './propsFactories/InfoParagraph.propsFactory';
@@ -7,7 +7,7 @@ import NavbarProps from './propsFactories/Navbar.propsFactory';
 import SignupFormProps from './propsFactories/SignupForm.propsFactory';
 
 const propsList = {
-  AppProps,
+  AppContainerProps,
   ErrorMessageProps,
   ErrorMessagesProps,
   InfoParagraphProps,
