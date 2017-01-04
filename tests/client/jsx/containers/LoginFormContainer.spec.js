@@ -73,6 +73,7 @@ describe('<LoginFormContainer />', () => {
       it('sets state appropriately', () => {
         wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
         const handleChange = wrapper.instance().handleChange;
+        sandbox.stub(wrapper.instance(), 'enableSubmit').returns(true);
 
         event = createEventTargetValue('boblob');
         handleChange('email', event);
@@ -92,7 +93,7 @@ describe('<LoginFormContainer />', () => {
         wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
         const instance = wrapper.instance();
         const handleChange = instance.handleChange;
-        sandbox.spy(instance, 'enableSubmit');
+        sandbox.stub(instance, 'enableSubmit').returns(true);
 
         event = createEventTargetValue('bobloblaw@law.blog');
         handleChange('email', event);
