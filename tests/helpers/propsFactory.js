@@ -7,6 +7,7 @@ import LoginFormProps from './propsFactories/LoginForm.propsFactory';
 import NavbarContainerProps from './propsFactories/NavbarContainer.propsFactory';
 import NavbarProps from './propsFactories/Navbar.propsFactory';
 import SignupFormProps from './propsFactories/SignupForm.propsFactory';
+import SignupFormContainerProps from './propsFactories/SignupFormContainer.propsFactory';
 
 const propsList = {
   AppContainerProps,
@@ -17,6 +18,7 @@ const propsList = {
   LoginFormProps,
   NavbarContainerProps,
   NavbarProps,
+  SignupFormContainerProps,
   SignupFormProps,
 };
 

@@ -5,7 +5,7 @@ import SignupForm from '../components/SignupForm';
 import { signupUser } from '../redux/actionCreators/userAuth';
 import errorConstants, { addError, removeError } from '../constants/errorConstants';
 
-class SignupFormContainer extends Component {
+export class SignupFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,7 @@ class SignupFormContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.signupUser(this.state)
+    return this.props.signupUser(this.state)
       .then(() => {
         this.props.router.push('/');
       })
