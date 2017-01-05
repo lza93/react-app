@@ -11,8 +11,9 @@ const storeState = {
   },
 };
 
-export default (slice) => {
+export default (slice, objectProperties) => {
   if (!slice) return storeState;
   if (!Object.keys(storeState).includes(slice)) throw new Error('that slice of store doesn\'t exist');
-  return storeState[slice];
+  const newObject = Object.assign({}, storeState[slice], objectProperties);
+  return Object.freeze(newObject);
 };
