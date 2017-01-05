@@ -54,7 +54,7 @@ describe('<LoginFormContainer />', () => {
       });
 
       it('calls addError when loginUser is unsuccessful', () => {
-        sandbox.spy(errorConstants, 'addError');
+        sandbox.stub(errorConstants, 'addError');
         const newProps = Object.assign({}, LoginFormContainerProps, {
           loginUser: rejectedPromise,
         });
@@ -107,7 +107,7 @@ describe('<LoginFormContainer />', () => {
 
     describe('displayEmailError', () => {
       it('calls addError for invalid email', () => {
-        sandbox.spy(errorConstants, 'addError');
+        sandbox.stub(errorConstants, 'addError');
         wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validateEmail').returns(false);
         wrapper.instance().displayEmailError();
@@ -115,7 +115,7 @@ describe('<LoginFormContainer />', () => {
       });
 
       it('calls removeError for valid email', () => {
-        sandbox.spy(errorConstants, 'removeError');
+        sandbox.stub(errorConstants, 'removeError');
         wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validateEmail').returns(true);
         wrapper.instance().displayEmailError();
