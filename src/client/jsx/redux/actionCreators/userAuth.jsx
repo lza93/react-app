@@ -23,8 +23,7 @@ export function signupUser(userData) {
         ...user.data,
         loggedIn: true,
       };
-      dispatch(userAction(newUser));
-      return newUser;
+      return dispatch(userAction(newUser));
     });
 }
 
@@ -43,10 +42,7 @@ export function loginUser(userData) {
 
 export function logoutUser() {
   return dispatch => axios.delete('/api/sessions')
-    .then(() => {
-      dispatch(userAction(initialState));
-      return {};
-    })
+    .then(() => dispatch(userAction(initialState)))
     .catch((err) => {
       console.log('THIS IS AN UNHANDLED ERROR', err);
       return {};
