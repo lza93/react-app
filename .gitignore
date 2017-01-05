@@ -1,6 +1,8 @@
 node_modules
+coverage
 secrets
 .DS_Store
+.nyc_output
 npm-debug.log
 src/client/assets/javascript/bundle.js
 src/client/assets/javascript/bundle.js.map
