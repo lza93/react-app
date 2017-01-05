@@ -33,7 +33,7 @@ export function noDuplicateIds(arrayToCheck, objectToAdd) {
 }
 
 export function addError(contextThis, errorToAdd) {
-  console.log('addError is called');
+  console.log('-----------------------addError is called-----------------------');
   if (noDuplicateIds(contextThis.state.errors, errorToAdd)) {
     const newStateErrors = [...contextThis.state.errors, errorToAdd];
     contextThis.setState({
@@ -43,7 +43,7 @@ export function addError(contextThis, errorToAdd) {
 }
 
 export function removeError(contextThis, errorToRemove) {
-  console.log('removeError is called')
+  console.log('-----------------------removeError is called-----------------------')
   const indexOfError = contextThis.state.errors.findIndex(
     errorInState => errorInState.id === errorToRemove.id // eslint-disable-line
   );
