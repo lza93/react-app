@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import React, { Component, PropTypes } from 'react';
 import { routerShape } from 'react-router';
-import NavbarContainer from '../containers/NavbarContainer';
+import ConnectedNavbarContainer from '../containers/NavbarContainer';
 import AppLoading from '../components/AppLoading';
 import { loginActiveSession } from '../redux/actionCreators/userAuth';
 
@@ -29,7 +29,7 @@ export class AppContainer extends Component {
       <AppLoading /> :
       (
         <div id="app-root">
-          <NavbarContainer router={this.props.router} />
+          <ConnectedNavbarContainer router={this.props.router} />
           <div>
             { this.props.children ? this.props.children : null }
           </div>
