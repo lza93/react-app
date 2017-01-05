@@ -13,7 +13,8 @@
     "seed-dev": "NODE_ENV=development node seed/seed.js",
     "seed-test": "NODE_ENV=test node seed/seed.js",
     "start": "NODE_ENV=development nodemon --harmony-async-await app.js",
-    "test": "NODE_ENV=test mocha tests/helpers/globalTestVariables.js tests --harmony-async-await --recursive"
+    "test": "NODE_ENV=test mocha tests/helpers/globalTestVariables.js tests --harmony-async-await --recursive",
+    "cover": "NODE_ENV=test nyc --reporter=html --reporter=text mocha tests/helpers/globalTestVariables.js tests --harmony-async-await --recursive"
   },
   "keywords": [],
   "author": "",
@@ -57,10 +58,15 @@
     "jsdom": "^9.9.1",
     "mocha": "^3.2.0",
     "nock": "^9.0.2",
+    "nyc": "^10.0.0",
     "react-addons-test-utils": "^15.4.1",
     "react-dom": "^15.4.1",
     "redux-mock-store": "^1.2.1",
     "sinon": "^1.17.6",
     "sinon-as-promised": "^4.0.2"
+  },
+  "nyc": {
+    "include": ["**/src/**"],
+    "extension": [".jsx"]
   }
 }
