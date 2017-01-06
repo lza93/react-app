@@ -4,7 +4,7 @@ import userReducer from '../../../../../src/client/jsx/redux/reducers/userReduce
 import initialState from '../../../../../src/client/jsx/redux/reducers/userInitialState';
 import storeFake from '../../../../helpers/storeFake';
 import generateObject from '../../../../helpers/generateObject';
-import * as actionTypes from '../../../../../src/client/jsx/constants/actionTypes';
+import * as actionTypes from '../../../../../src/client/jsx/utils/actionTypes';
 
 describe('UserReducer', () => {
   let returnedState;

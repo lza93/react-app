@@ -5,7 +5,7 @@ import nock from 'nock';
 import sinon from 'sinon';
 
 import * as userAuth from '../../../../../src/client/jsx/redux/actionCreators/userAuth';
-import * as actionTypes from '../../../../../src/client/jsx/constants/actionTypes';
+import * as actionTypes from '../../../../../src/client/jsx/utils/actionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

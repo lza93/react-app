@@ -1,4 +1,4 @@
-import { SET_USER } from '../../constants/actionTypes';
+import { SET_USER } from '../../utils/actionTypes';
 import initialState from './userInitialState';
 
 export default function (state = initialState, action) {

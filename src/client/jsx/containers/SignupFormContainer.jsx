@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { routerShape } from 'react-router';
 import SignupForm from '../components/SignupForm';
 import { signupUser } from '../redux/actionCreators/userAuth';
-import errorConstants, { addError, removeError } from '../constants/errorConstants';
+import errorConstants, { addError, removeError } from '../utils/errorUtils';
 
 export class SignupFormContainer extends Component {
   constructor(props) {
