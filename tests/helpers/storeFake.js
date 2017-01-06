@@ -17,3 +17,5 @@ export default (slice, objectProperties) => {
   const newObject = Object.assign({}, storeState[slice], objectProperties);
   return Object.freeze(newObject);
 };
+
+export const dispatch = () => {};

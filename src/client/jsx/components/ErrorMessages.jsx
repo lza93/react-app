@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import deepEqual from 'deep-equal';
 
 export const ErrorMessage = ({ message, classNamesString }) => {
   classNamesString = classNamesString || 'text-danger';
@@ -31,7 +32,7 @@ export default class ErrorContainer extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.state.errors === newProps.errors) { return; }
+    if (deepEqual(this.state.errors, newProps.errors)) { return; }
     this.setState({
       errors: newProps.errors,
     });

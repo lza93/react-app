@@ -3,11 +3,12 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { AppContainer } from '../../../../src/client/jsx/containers/AppContainer';
-import NavbarContainer from '../../../../src/client/jsx/containers/NavbarContainer';
+import { AppContainer, mapStateToProps, mapDispatchToProps } from '../../../../src/client/jsx/containers/AppContainer';
+import ConnectedNavbarContainer from '../../../../src/client/jsx/containers/NavbarContainer';
 import AppLoading from '../../../../src/client/jsx/components/AppLoading';
 import propsFactory from '../../../helpers/propsFactory';
-
+import storeFake, * as storeFakeMethods from '../../../helpers/storeFake';
+import * as userAuth from '../../../../src/client/jsx/redux/actionCreators/userAuth';
 
 describe('<AppContainer />', () => {
   let wrapper;
@@ -38,7 +39,7 @@ describe('<AppContainer />', () => {
 
     it('renders Navbar component', () => {
       wrapper = shallow(<AppContainer {...AppContainerProps} />);
-      expect(wrapper.find(NavbarContainer)).to.have.length(1);
+      expect(wrapper.find(ConnectedNavbarContainer)).to.have.length(1);
     });
 
     it('renders children passed in component', () => {
@@ -74,6 +75,42 @@ describe('<AppContainer />', () => {
       wrapper.setProps({ appLoading: false });
       expect(Component.prototype.setState.calledTwice).to.equal(true);
       expect(wrapper.state('appLoading')).to.equal(false);
+    });
+  });
+
+  describe('Mapping State and Dispatch to Props', () => {
+    describe('mapStateToProps', () => {
+      let store;
+
+      beforeEach((done) => {
+        store = storeFake();
+        done();
+      });
+
+      it('returns appropriate props', () => {
+        const expectedProps = propsFactory('AppContainerProps', 'empty');
+        delete expectedProps.loginActiveSession;
+        const returnedProps = mapStateToProps(store);
+        expect(returnedProps).to.deep.equal(expectedProps);
+      });
+    });
+
+    describe('mapDispatchToProps', () => {
+      let returnedProps;
+      beforeEach((done) => {
+        sandbox.spy(storeFakeMethods, 'dispatch');
+        returnedProps = mapDispatchToProps(storeFakeMethods.dispatch);
+        done();
+      });
+
+      it('maps loginActiveSession to props', () => {
+        expect(returnedProps.loginActiveSession).to.exist; // eslint-disable-line
+        sandbox.stub(userAuth, 'loginActiveSession');
+        returnedProps.loginActiveSession();
+        expect(storeFakeMethods.dispatch.calledOnce).to.equal(true);
+        expect(userAuth.loginActiveSession.calledOnce).to.equal(true);
+        expect(storeFakeMethods.dispatch.calledWith(userAuth.loginActiveSession())).to.equal(true);
+      });
     });
   });
 });

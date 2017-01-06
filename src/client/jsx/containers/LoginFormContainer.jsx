@@ -69,11 +69,11 @@ export class LoginFormContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   user: state.user,
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   loginUser(userData) {
     return dispatch(loginUser(userData));
   },

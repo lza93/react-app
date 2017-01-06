@@ -3,12 +3,14 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { LoginFormContainer } from '../../../../src/client/jsx/containers/LoginFormContainer';
+import { LoginFormContainer, mapStateToProps, mapDispatchToProps } from '../../../../src/client/jsx/containers/LoginFormContainer';
 import LoginForm from '../../../../src/client/jsx/components/LoginForm';
 import * as errorConstants from '../../../../src/client/jsx/constants/errorConstants';
 import propsFactory from '../../../helpers/propsFactory';
 import { rejectedPromise } from '../../../helpers/emptyPromise';
 import { createBasicEvent, createEventTargetValue } from '../../../helpers/eventCreators';
+import storeFake, * as storeFakeMethods from '../../../helpers/storeFake';
+import * as userAuth from '../../../../src/client/jsx/redux/actionCreators/userAuth';
 
 describe('<LoginFormContainer />', () => {
   let wrapper;
@@ -166,6 +168,45 @@ describe('<LoginFormContainer />', () => {
         expect(instance.validateEmail()).to.equal(true);
         wrapper.setState({ email: 'bobloblawATlawDOTblog' });
         expect(instance.validateEmail()).to.equal(false);
+      });
+    });
+  });
+
+  describe('Mapping State and Dispatch to Props', () => {
+    describe('mapStateToProps', () => {
+      let store;
+
+      beforeEach((done) => {
+        store = storeFake();
+        done();
+      });
+
+      it('returns appropriate props', () => {
+        const expectedProps = propsFactory('LoginFormContainerProps', 'empty');
+        delete expectedProps.loginUser;
+        delete expectedProps.router;
+        const returnedProps = mapStateToProps(store);
+        expect(returnedProps).to.deep.equal(expectedProps);
+      });
+    });
+
+    describe('mapDispatchToProps', () => {
+      let returnedProps;
+      beforeEach((done) => {
+        sandbox.spy(storeFakeMethods, 'dispatch');
+        returnedProps = mapDispatchToProps(storeFakeMethods.dispatch);
+        done();
+      });
+
+      it('maps loginUser to props', () => {
+        expect(returnedProps.loginUser).to.exist; // eslint-disable-line
+        sandbox.stub(userAuth, 'loginUser');
+        const userData = {};
+        returnedProps.loginUser(userData);
+        expect(storeFakeMethods.dispatch.calledOnce).to.equal(true);
+        expect(userAuth.loginUser.calledOnce).to.equal(true);
+        expect(userAuth.loginUser.calledWith(userData)).to.equal(true);
+        expect(storeFakeMethods.dispatch.calledWith(userAuth.loginUser())).to.equal(true);
       });
     });
   });

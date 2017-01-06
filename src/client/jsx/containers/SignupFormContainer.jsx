@@ -128,11 +128,11 @@ export class SignupFormContainer extends Component {
 
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   user: state.user,
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   signupUser(userData) {
     return dispatch(signupUser(userData));
   },

@@ -16,6 +16,7 @@ export function finishedLoadingUser() {
 }
 
 export function signupUser(userData) {
+  console.log('being cllaed!!!!!!!!!!')
   return dispatch => axios.post('/api/users', userData)
     .then((user) => {
       const newUser = {
