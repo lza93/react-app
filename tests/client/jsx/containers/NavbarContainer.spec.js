@@ -58,13 +58,34 @@ describe('<NavbarContainer />', () => {
         });
         wrapper = shallow(<NavbarContainer {...newProps} />);
         event = createBasicEvent();
-
+        
         return wrapper.instance().logout(event)
           .then(() => {
             // no decision made yet on how to handle front end failure of logout
             expect(true).to.equal(true);
           });
       });
+    });
+  });
+
+  describe('Lifecycle Tests', () => {
+    it('updates state if loggedIn status changes', () => {
+      wrapper = shallow(<NavbarContainer {...NavbarContainerProps} />);
+      sandbox.spy(wrapper.instance(), 'setState');
+      const newProps = propsFactory('NavbarContainerProps', 'filled');
+      wrapper.setProps(newProps);
+      expect(wrapper.instance().setState.calledOnce).to.equal(true);
+      wrapper.setProps(NavbarContainerProps);
+      expect(wrapper.instance().setState.calledTwice).to.equal(true);
+    });
+
+    it('doesn\'t update state if loggedIn status is the same', () => {
+      wrapper = shallow(<NavbarContainer {...NavbarContainerProps} />);
+      sandbox.spy(wrapper.instance(), 'setState');
+      const newProps = propsFactory('NavbarContainerProps', 'filled');
+      newProps.user.loggedIn = false;
+      wrapper.setProps(newProps);
+      expect(wrapper.instance().setState.called).to.equal(false);
     });
   });
 });

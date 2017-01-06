@@ -15,6 +15,7 @@ export class NavbarContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(this.state.loggedIn, nextProps.user.loggedIn)
     if (this.state.loggedIn !== nextProps.user.loggedIn) {
       this.setState({ loggedIn: nextProps.user.loggedIn });
     }

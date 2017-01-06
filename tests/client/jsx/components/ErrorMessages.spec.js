@@ -42,7 +42,7 @@ describe('<ErrorContainer /> Component', () => {
       wrapper = shallow(<ErrorContainer {...props} />);
       sandbox.spy(wrapper.instance(), 'setState');
       const newProps = Object.assign({}, props);
-      newProps.errors = props.errors.slice()
+      newProps.errors = props.errors.slice();
       newProps.errors.push({ id: 'error#4', message: 'changed error4' });
       wrapper.setProps(newProps);
       expect(wrapper.instance().setState.called).to.equal(true);
