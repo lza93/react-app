@@ -3,11 +3,13 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { NavbarContainer } from '../../../../src/client/jsx/containers/NavbarContainer';
+import { NavbarContainer, mapStateToProps, mapDispatchToProps } from '../../../../src/client/jsx/containers/NavbarContainer';
 import Navbar from '../../../../src/client/jsx/components/Navbar';
 import propsFactory from '../../../helpers/propsFactory';
 import { createBasicEvent } from '../../../helpers/eventCreators';
 import { rejectedPromise } from '../../../helpers/emptyPromise';
+import storeFake, * as storeFakeMethods from '../../../helpers/storeFake';
+import * as userAuth from '../../../../src/client/jsx/redux/actionCreators/userAuth';
 
 describe('<NavbarContainer />', () => {
   let wrapper;
@@ -86,6 +88,45 @@ describe('<NavbarContainer />', () => {
       newProps.user.loggedIn = false;
       wrapper.setProps(newProps);
       expect(wrapper.instance().setState.called).to.equal(false);
+    });
+  });
+
+  describe('Mapping State and Dispatch to Props', () => {
+    describe('mapStateToProps', () => {
+      let store;
+
+      beforeEach((done) => {
+        store = storeFake();
+        done();
+      });
+
+      it('returns appropriate props', () => {
+        const expectedProps = propsFactory('NavbarContainerProps', 'empty');
+        delete expectedProps.logoutUser;
+        delete expectedProps.router;
+        const returnedProps = mapStateToProps(store);
+        expect(returnedProps).to.deep.equal(expectedProps);
+      });
+    });
+
+    describe('mapDispatchToProps', () => {
+      let returnedProps;
+      beforeEach((done) => {
+        sandbox.spy(storeFakeMethods, 'dispatch');
+        returnedProps = mapDispatchToProps(storeFakeMethods.dispatch);
+        done();
+      });
+
+      it('maps logoutUser to props', () => {
+        expect(returnedProps.logoutUser).to.exist; // eslint-disable-line
+        sandbox.stub(userAuth, 'logoutUser');
+        const userData = {};
+        returnedProps.logoutUser();
+        expect(storeFakeMethods.dispatch.calledOnce).to.equal(true);
+        expect(userAuth.logoutUser.calledOnce).to.equal(true);
+        expect(userAuth.logoutUser.calledWith()).to.equal(true);
+        expect(storeFakeMethods.dispatch.calledWith(userAuth.logoutUser())).to.equal(true);
+      });
     });
   });
 });

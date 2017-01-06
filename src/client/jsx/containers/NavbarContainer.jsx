@@ -15,7 +15,6 @@ export class NavbarContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.state.loggedIn, nextProps.user.loggedIn)
     if (this.state.loggedIn !== nextProps.user.loggedIn) {
       this.setState({ loggedIn: nextProps.user.loggedIn });
     }
@@ -29,7 +28,7 @@ export class NavbarContainer extends Component {
         return;
       })
       .catch((err) => {
-        if (process.env.NODE_ENV !== 'test') { console.log('unhandled error logging out', err); }
+        console.log('unhandled error logging out', err);
       });
   }
 
@@ -43,11 +42,11 @@ export class NavbarContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   user: state.user,
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   logoutUser() {
     return dispatch(logoutUser());
   },

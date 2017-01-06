@@ -198,7 +198,7 @@ describe('<LoginFormContainer />', () => {
         done();
       });
 
-      it('maps loginActiveSession to props', () => {
+      it('maps loginUser to props', () => {
         expect(returnedProps.loginUser).to.exist; // eslint-disable-line
         sandbox.stub(userAuth, 'loginUser');
         const userData = {};
