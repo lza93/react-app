@@ -95,7 +95,7 @@ describe('<AppContainer />', () => {
       });
     });
 
-    describe('mapDispatchProps', () => {
+    describe('mapDispatchToProps', () => {
       let returnedProps;
       beforeEach((done) => {
         sandbox.spy(storeFakeMethods, 'dispatch');

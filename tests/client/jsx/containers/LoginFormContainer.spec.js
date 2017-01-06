@@ -190,7 +190,7 @@ describe('<LoginFormContainer />', () => {
       });
     });
 
-    describe('mapDispatchProps', () => {
+    describe('mapDispatchToProps', () => {
       let returnedProps;
       beforeEach((done) => {
         sandbox.spy(storeFakeMethods, 'dispatch');
