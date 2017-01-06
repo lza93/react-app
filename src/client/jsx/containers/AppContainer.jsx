@@ -48,12 +48,12 @@ AppContainer.propTypes = {
   router: routerShape,
 };
 
-const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state, ownProps) => ({
   appLoading: state.loading.appLoading,
   ...ownProps,
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   loginActiveSession() {
     dispatch(loginActiveSession());
   },
