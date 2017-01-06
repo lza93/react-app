@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import * as errorUtils from '../../../../src/client/jsx/constants/errorConstants';
+import * as errorUtils from '../../../../src/client/jsx/utils/errorUtils';
 
 describe('errorUtils', () => {
   let sandbox;

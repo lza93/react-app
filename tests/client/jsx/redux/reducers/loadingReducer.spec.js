@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import loadingReducer from '../../../../../src/client/jsx/redux/reducers/loadingReducer';
 import initialState from '../../../../../src/client/jsx/redux/reducers/loadingInitialState';
 import storeFake from '../../../../helpers/storeFake';
-import * as actionTypes from '../../../../../src/client/jsx/constants/actionTypes';
+import * as actionTypes from '../../../../../src/client/jsx/utils/actionTypes';
 
 describe('LoadingReducer', () => {
   let returnedState;

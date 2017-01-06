@@ -5,7 +5,7 @@ import sinon from 'sinon';
 
 import { LoginFormContainer, mapStateToProps, mapDispatchToProps } from '../../../../src/client/jsx/containers/LoginFormContainer';
 import LoginForm from '../../../../src/client/jsx/components/LoginForm';
-import * as errorConstants from '../../../../src/client/jsx/constants/errorConstants';
+import * as errorUtils from '../../../../src/client/jsx/utils/errorUtils';
 import propsFactory from '../../../helpers/propsFactory';
 import { rejectedPromise } from '../../../helpers/emptyPromise';
 import { createBasicEvent, createEventTargetValue } from '../../../helpers/eventCreators';
@@ -56,7 +56,7 @@ describe('<LoginFormContainer />', () => {
       });
 
       it('calls addError when loginUser is unsuccessful', () => {
-        sandbox.stub(errorConstants, 'addError');
+        sandbox.stub(errorUtils, 'addError');
         const newProps = Object.assign({}, LoginFormContainerProps, {
           loginUser: rejectedPromise,
         });
@@ -66,7 +66,7 @@ describe('<LoginFormContainer />', () => {
 
         return handleSubmit(event)
           .then(() => {
-            expect(errorConstants.addError.calledOnce).to.equal(true);
+            expect(errorUtils.addError.calledOnce).to.equal(true);
           });
       });
     });
@@ -109,19 +109,19 @@ describe('<LoginFormContainer />', () => {
 
     describe('displayEmailError', () => {
       it('calls addError for invalid email', () => {
-        sandbox.stub(errorConstants, 'addError');
+        sandbox.stub(errorUtils, 'addError');
         wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validateEmail').returns(false);
         wrapper.instance().displayEmailError();
-        expect(errorConstants.addError.calledOnce).to.equal(true);
+        expect(errorUtils.addError.calledOnce).to.equal(true);
       });
 
       it('calls removeError for valid email', () => {
-        sandbox.stub(errorConstants, 'removeError');
+        sandbox.stub(errorUtils, 'removeError');
         wrapper = shallow(<LoginFormContainer {...LoginFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validateEmail').returns(true);
         wrapper.instance().displayEmailError();
-        expect(errorConstants.removeError.calledOnce).to.equal(true);
+        expect(errorUtils.removeError.calledOnce).to.equal(true);
       });
     });
 

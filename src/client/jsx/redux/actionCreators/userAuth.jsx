@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SET_USER, FINISHED_LOADING_USER } from '../../constants/actionTypes';
+import { SET_USER, FINISHED_LOADING_USER } from '../../utils/actionTypes';
 import initialState from '../reducers/userInitialState';
 
 export function userAction(user) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { routerShape } from 'react-router';
 import LoginForm from '../components/LoginForm';
 import { loginUser } from '../redux/actionCreators/userAuth';
-import errorConstants, { addError, removeError } from '../constants/errorConstants';
+import errorConstants, { addError, removeError } from '../utils/errorUtils';
 
 export class LoginFormContainer extends Component {
   constructor(props) {

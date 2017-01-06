@@ -5,7 +5,7 @@ import sinon from 'sinon';
 
 import { SignupFormContainer, mapStateToProps, mapDispatchToProps } from '../../../../src/client/jsx/containers/SignupFormContainer';
 import SignupForm from '../../../../src/client/jsx/components/SignupForm';
-import * as errorConstants from '../../../../src/client/jsx/constants/errorConstants';
+import * as errorUtils from '../../../../src/client/jsx/utils/errorUtils';
 import propsFactory from '../../../helpers/propsFactory';
 import { rejectedPromise } from '../../../helpers/emptyPromise';
 import { createBasicEvent, createEventTargetValue } from '../../../helpers/eventCreators';
@@ -56,7 +56,7 @@ describe('<SignupFormContainer />', () => {
       });
 
       it('calls addError when signupUser is unsuccessful', () => {
-        sandbox.stub(errorConstants, 'addError');
+        sandbox.stub(errorUtils, 'addError');
         const newProps = Object.assign({}, SignupFormContainerProps, {
           signupUser: rejectedPromise,
         });
@@ -66,7 +66,7 @@ describe('<SignupFormContainer />', () => {
 
         return handleSubmit(event)
           .then(() => {
-            expect(errorConstants.addError.calledOnce).to.equal(true);
+            expect(errorUtils.addError.calledOnce).to.equal(true);
           });
       });
     });
@@ -112,73 +112,73 @@ describe('<SignupFormContainer />', () => {
 
     describe('displayEmailError', () => {
       it('calls addError for invalid email', () => {
-        sandbox.stub(errorConstants, 'addError');
+        sandbox.stub(errorUtils, 'addError');
         wrapper = shallow(<SignupFormContainer {...SignupFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validateEmail').returns(false);
         wrapper.instance().displayEmailError();
-        expect(errorConstants.addError.calledOnce).to.equal(true);
+        expect(errorUtils.addError.calledOnce).to.equal(true);
       });
 
       it('calls removeError for valid email', () => {
-        sandbox.stub(errorConstants, 'removeError');
+        sandbox.stub(errorUtils, 'removeError');
         wrapper = shallow(<SignupFormContainer {...SignupFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validateEmail').returns(true);
         wrapper.instance().displayEmailError();
-        expect(errorConstants.removeError.calledOnce).to.equal(true);
+        expect(errorUtils.removeError.calledOnce).to.equal(true);
       });
     });
 
     describe('displayUsernameError', () => {
       it('calls addError for invalid username', () => {
-        sandbox.stub(errorConstants, 'addError');
+        sandbox.stub(errorUtils, 'addError');
         wrapper = shallow(<SignupFormContainer {...SignupFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validateUsername').returns(false);
         wrapper.instance().displayUsernameError();
-        expect(errorConstants.addError.calledOnce).to.equal(true);
+        expect(errorUtils.addError.calledOnce).to.equal(true);
       });
 
       it('calls removeError for valid username', () => {
-        sandbox.stub(errorConstants, 'removeError');
+        sandbox.stub(errorUtils, 'removeError');
         wrapper = shallow(<SignupFormContainer {...SignupFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validateUsername').returns(true);
         wrapper.instance().displayUsernameError();
-        expect(errorConstants.removeError.calledOnce).to.equal(true);
+        expect(errorUtils.removeError.calledOnce).to.equal(true);
       });
     });
 
     describe('displayPasswordError', () => {
       it('calls addError for invalid password', () => {
-        sandbox.stub(errorConstants, 'addError');
+        sandbox.stub(errorUtils, 'addError');
         wrapper = shallow(<SignupFormContainer {...SignupFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validatePassword').returns(false);
         wrapper.instance().displayPasswordError();
-        expect(errorConstants.addError.calledOnce).to.equal(true);
+        expect(errorUtils.addError.calledOnce).to.equal(true);
       });
 
       it('calls removeError for valid password', () => {
-        sandbox.stub(errorConstants, 'removeError');
+        sandbox.stub(errorUtils, 'removeError');
         wrapper = shallow(<SignupFormContainer {...SignupFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validatePassword').returns(true);
         wrapper.instance().displayPasswordError();
-        expect(errorConstants.removeError.calledOnce).to.equal(true);
+        expect(errorUtils.removeError.calledOnce).to.equal(true);
       });
     });
 
     describe('displayPasswordConfirmationError', () => {
       it('calls addError for invalid passwordConfirmation', () => {
-        sandbox.stub(errorConstants, 'addError');
+        sandbox.stub(errorUtils, 'addError');
         wrapper = shallow(<SignupFormContainer {...SignupFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validatePasswordConfirmation').returns(false);
         wrapper.instance().displayPasswordConfirmationError();
-        expect(errorConstants.addError.calledOnce).to.equal(true);
+        expect(errorUtils.addError.calledOnce).to.equal(true);
       });
 
       it('calls removeError for valid passwordConfirmation', () => {
-        sandbox.stub(errorConstants, 'removeError');
+        sandbox.stub(errorUtils, 'removeError');
         wrapper = shallow(<SignupFormContainer {...SignupFormContainerProps} />);
         sandbox.stub(wrapper.instance(), 'validatePasswordConfirmation').returns(true);
         wrapper.instance().displayPasswordConfirmationError();
-        expect(errorConstants.removeError.calledOnce).to.equal(true);
+        expect(errorUtils.removeError.calledOnce).to.equal(true);
       });
     });
 
