@@ -16,7 +16,6 @@ export function finishedLoadingUser() {
 }
 
 export function signupUser(userData) {
-  console.log('being cllaed!!!!!!!!!!')
   return dispatch => axios.post('/api/users', userData)
     .then((user) => {
       const newUser = {
@@ -45,7 +44,7 @@ export function logoutUser() {
   return dispatch => axios.delete('/api/sessions')
     .then(() => dispatch(userAction(initialState)))
     .catch((err) => {
-      console.log('THIS IS AN UNHANDLED ERROR', err);
+      console.log('THIS IS AN UNHANDLED ERROR', err.message);
       return {};
     });
 }
@@ -55,7 +54,7 @@ export function loginActiveSession() {
     .then((user) => {
       if (!user.data) {
         dispatch(finishedLoadingUser());
-        return logoutUser();
+        return dispatch(logoutUser());
       }
       const newUser = {
         ...initialState,
