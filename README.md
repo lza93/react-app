@@ -77,6 +77,6 @@ E.g. to set the SESSION_SECRET
 
 #### Initialize Your Database
 
-   heroku run node seed/dbInit
+    heroku run node seed/dbInit
 
 Your app should now be live and at the url for your heroku app. Happy Coding!
