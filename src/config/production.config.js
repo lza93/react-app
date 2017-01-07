@@ -1,5 +1,5 @@
 console.log('loading production config');
 
 module.exports = {
-  sessionSecret: process.env.SESSION_SECRET,
+  SESSION_SECRET: process.env.SESSION_SECRET,
 };

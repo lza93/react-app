@@ -1,3 +1,4 @@
+const config = require('../src/config/appConfig');
 const db = require('../src/server/models/db');
 const User = db.models.user;
 const Role = db.models.role;
