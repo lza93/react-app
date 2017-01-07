@@ -71,8 +71,12 @@ E.g. to set the SESSION_SECRET
 
     heroku config:set SESSION_SECRET=replaceThisTextWithYourOwnSecret
 
-#### Push your app to heroku
+#### Push Your App to Heroku
 
     git push heroku master
+
+#### Initialize Your Database
+
+   heroku run node seed/dbInit
 
 Your app should now be live and at the url for your heroku app. Happy Coding!
