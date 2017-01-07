@@ -1,13 +1,15 @@
 /* global describe it xit */
 const { expect } = require('chai');
 const sinon = require('sinon');
+const sinonAsPromised = require('sinon-as-promised');
+const bcrypt = require('bcrypt');
 const db = require('../../../../src/server/models/db');
 
 const User = db.models.user;
 
 describe('User model', () => {
   let testUser;
-
+  let sandbox;
   beforeEach(async () => {
     testUser = await User.create(
       {
@@ -16,7 +18,6 @@ describe('User model', () => {
         password: 'password',
       },
     );
-    return testUser;
   });
 
   afterEach(() => User.destroy({ where: {} }));
@@ -39,8 +40,15 @@ describe('User model', () => {
   });
 
   describe('instance methods', () => {
+    beforeEach(() => {
+      sandbox = sinon.sandbox.create();
+    });
+    afterEach(() => {
+      sandbox.restore();
+    });
+
     describe('checkPassword', () => {
-      it('should check to see whether a given password is correct', async () => {
+      it('should return true for correct password', async () => {
         expect(typeof testUser.checkPassword).to.equal('function');
         const isCorrectPassword = await testUser.checkPassword('password');
         expect(isCorrectPassword).to.equal(true);
@@ -51,6 +59,20 @@ describe('User model', () => {
         const isCorrectPassword = await testUser.checkPassword('notACorrectPassword');
         expect(isCorrectPassword).to.equal(false);
       });
+
+      it('should return false if an error occurs', async () => {
+        const originalCompare = bcrypt.compare;
+        const error = new Error('test generated error');
+        bcrypt.compare = (pw, pw2, func) => {
+          func(error, 'something');
+        };
+        return await testUser.checkPassword('password')
+          .then(() => { bcrypt.compare = originalCompare; }) // extra safety incase test passes
+          .catch((err) => {
+            bcrypt.compare = originalCompare; // NB! Reset bcrypt.compare to original method
+            expect(err).to.equal(error);
+          });
+      });
     });
 
     describe('hashPassword', () => {
@@ -60,11 +82,24 @@ describe('User model', () => {
         const hashedPassword = await testUser.hashPassword();
         expect(testUser.password).to.equal(hashedPassword);
       });
+
+      it('should reject with an error message if there is an error', async () => {
+        const originalHash = bcrypt.hash;
+        const error = new Error('test generated error');
+        bcrypt.hash = (pw, iter, func) => {
+          func(error, 'something');
+        };
+        return await testUser.hashPassword('password')
+          .then(() => { bcrypt.hash = originalHash; }) // extra safety incase test passes
+          .catch((err) => {
+            bcrypt.hash = originalHash; // NB!! Reset bcrypt.compare to original method
+            expect(err).to.equal(error);
+          });
+      });
     });
   });
 
   describe('hooks', () => {
-    let sandbox;
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
       return;

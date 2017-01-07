@@ -71,7 +71,8 @@
       "**/src/**"
     ],
     "extension": [
-      ".jsx"
+      ".jsx",
+      "/src/server/models/db/db.js"
     ]
   }
 }
