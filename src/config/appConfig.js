@@ -1,8 +1,9 @@
 const path = require('path');
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 const environmentSettings = require(`./${process.env.NODE_ENV}.config`); // eslint-disable-line
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const rootPath = path.join(__dirname, '../');
 const indexHTML = `${rootPath}/client/index.html`;

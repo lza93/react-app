@@ -26,8 +26,10 @@ const userConfig = {
   instanceMethods: {
     checkPassword(password) {
       return new Promise((resolve, reject) => {
-        bcrypt.compare(password, this.password, (err, isSamePassword) => {
-          if (err) { return reject(err); }
+        return bcrypt.compare(password, this.password, (err, isSamePassword) => {
+          if (err) {
+            return reject(err);
+          }
           return resolve(isSamePassword);
         });
       });
@@ -35,7 +37,9 @@ const userConfig = {
     hashPassword() {
       return new Promise((resolve, reject) =>
         bcrypt.hash(this.password, 4, (err, hash) => {
-          if (err) { return reject(err); }
+          if (err) { 
+            return reject(err);
+          }
           this.password = hash;
           return resolve(hash);
         }));
