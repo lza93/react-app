@@ -43,7 +43,7 @@ The tests and test folders are written to mirror the file structure on the app, 
 
 ## Deploying to Heroku
 
-The app is configured to be able to esily upload to Heroku. Once you have a Heroku account and the Heroku CLI installed, you can follow the steps below to get the app up and running:
+The app is configured to be able to easily upload to Heroku. Once you have a Heroku account and the Heroku CLI installed, you can follow the steps below to get the app up and running:
 
 #### Create the Heroku App
 
